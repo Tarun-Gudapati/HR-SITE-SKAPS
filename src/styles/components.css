@@ -62,18 +62,21 @@
 .badge-new { display: inline-block; background: var(--ink); color: var(--on-dark); font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle; letter-spacing: .02em; }
 
 /* ---------- Notice bar (in normal flow above the sticky header, so it scrolls away) ---------- */
-.notice { background: var(--ink); color: var(--on-dark); font-size: 13px; line-height: 18px; letter-spacing: .005em; }
-.notice-view { overflow: hidden; }
+.notice { display: grid; grid-template: 1fr / minmax(0, 1fr); background: var(--ink); color: var(--on-dark); font-size: 13px; line-height: 18px; letter-spacing: .005em; transition: grid-template-rows .4s var(--ease-enter), opacity .4s var(--ease-enter); }
+.notice.is-hiding { grid-template-rows: 0fr; opacity: 0; pointer-events: none; }
+.notice:focus-visible { outline-offset: -3px; border-radius: 0; }
+.notice-view { min-height: 0; overflow: hidden; }
 .notice-track { display: flex; justify-content: center; }
 .notice-copy { flex: none; padding: 9px 24px; white-space: nowrap; }
 .notice-copy strong { font-weight: 700; color: #fff; }
 .notice.is-ticker .notice-view { -webkit-mask: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent); mask: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent); }
 .notice.is-ticker .notice-track { justify-content: flex-start; width: max-content; animation: notice var(--notice-dur, 40s) linear infinite; }
 .notice.is-ticker .notice-copy { margin-right: 48px; }
-.notice:hover .notice-track { animation-play-state: paused; }
+.notice:hover .notice-track, .notice:focus-visible .notice-track { animation-play-state: paused; }
 @keyframes notice { to { transform: translateX(-50%); } }
 @media (max-width: 640px) { .notice-copy { padding-inline: 16px; } }
 @media (prefers-reduced-motion: reduce) {
+  .notice { transition: none; }
   .notice.is-ticker .notice-view { -webkit-mask: none; mask: none; }
   .notice.is-ticker .notice-track { animation: none; width: auto; justify-content: center; }
   .notice-copy { flex: 0 1 auto; white-space: normal; text-align: center; }

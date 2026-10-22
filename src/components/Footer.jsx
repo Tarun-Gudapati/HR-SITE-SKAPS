@@ -44,7 +44,7 @@ export default function Footer({ footnote }) {
           </div>
           <div className="footer-bottom">
             <span>© {new Date().getFullYear()} SKAPS HR Solutions. All rights reserved.</span>
-            <span>India · United States · Australia</span>
+            <span>India · United States · United Kingdom · Australia</span>
           </div>
         </div>
       </div>

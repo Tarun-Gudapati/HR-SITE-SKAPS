@@ -43,26 +43,65 @@ function Promo({ promo, onNavigate }) {
   )
 }
 
+// Shown once per full page load, at module scope so client-side route changes never bring it back.
+let noticeDone = false
+const NOTICE_MS = 12000, NOTICE_OUT_MS = 400
+
 // Static and centred when the message fits on one line; otherwise a slow ticker (two copies, shifted by half to loop).
+// Collapses after NOTICE_MS; the countdown is held while hovered, keyboard-focused or in a background tab.
 function NoticeBar() {
   const bar = useRef(), view = useRef(), copy = useRef()
+  const clock = useRef({ left: NOTICE_MS, holds: new Set() })
   const [ticker, setTicker] = useState(false)
   const [dur, setDur] = useState(40)
+  const [phase, setPhase] = useState(() => (noticeDone ? 'gone' : 'shown'))
+  const gone = phase === 'gone'
   useLayoutEffect(() => {
+    const root = document.documentElement.style
+    if (gone) { root.setProperty('--notice-h', '0px'); return }
     const fit = () => {
       const w = copy.current.offsetWidth
       setTicker(w > view.current.clientWidth)
       setDur(Math.max(20, Math.round(w / 45)))
-      document.documentElement.style.setProperty('--notice-h', `${bar.current.offsetHeight}px`)
+      root.setProperty('--notice-h', `${bar.current.offsetHeight}px`)
     }
     fit()
     const ro = new ResizeObserver(fit)
     ro.observe(view.current); ro.observe(copy.current)
     return () => ro.disconnect()
+  }, [gone])
+
+  const run = () => {
+    const c = clock.current
+    c.at = Date.now()
+    c.timer = setTimeout(() => { noticeDone = true; setPhase(matchMedia('(prefers-reduced-motion: reduce)').matches ? 'gone' : 'hiding') }, c.left)
+  }
+  const hold = (reason, on) => {
+    const c = clock.current, was = c.holds.size > 0
+    on ? c.holds.add(reason) : c.holds.delete(reason)
+    if (noticeDone || was === c.holds.size > 0) return
+    if (was) run()
+    else { clearTimeout(c.timer); c.left -= Date.now() - c.at }
+  }
+  useEffect(() => {
+    if (noticeDone) return
+    const c = clock.current, onVis = () => hold('tab', document.hidden)
+    if (document.hidden) c.holds.add('tab'); else if (!c.holds.size) run()
+    document.addEventListener('visibilitychange', onVis)
+    return () => { clearTimeout(c.timer); document.removeEventListener('visibilitychange', onVis) }
   }, [])
+  useEffect(() => {
+    if (phase !== 'hiding') return
+    const t = setTimeout(() => setPhase('gone'), NOTICE_OUT_MS)
+    return () => clearTimeout(t)
+  }, [phase])
+
+  if (gone) return null
   const text = <><strong>{NOTICE[0]}:</strong> {NOTICE[1]}</>
   return (
-    <div ref={bar} className={`notice${ticker ? ' is-ticker' : ''}`} role="note" aria-label={NOTICE[0]}>
+    <div ref={bar} className={`notice${ticker ? ' is-ticker' : ''}${phase === 'hiding' ? ' is-hiding' : ''}`} role="note" aria-label={NOTICE[0]} tabIndex={0}
+      onMouseEnter={() => hold('hover', true)} onMouseLeave={() => hold('hover', false)}
+      onFocus={e => hold('focus', e.target.matches(':focus-visible'))} onBlur={() => hold('focus', false)}>
       <div ref={view} className="notice-view">
         <div className="notice-track" style={{ '--notice-dur': `${dur}s` }}>
           <p ref={copy} className="notice-copy">{text}</p>

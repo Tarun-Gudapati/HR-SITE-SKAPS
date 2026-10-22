@@ -11,7 +11,7 @@ export default function About() {
   usePolarity('default')
   return (
     <>
-      <PageHero eyebrow="About SKAPS" title="Talent is everywhere. Great teams are built together." copy="A team of HR, payroll and compliance specialists that works as an extension of yours, with the local knowledge to get the details right." points={['Founded as KAPS Consultancy Services in 2015', 'Headquartered in Hyderabad, India', 'Supporting teams in India, the United States and Australia']}>
+      <PageHero eyebrow="About SKAPS" title="Talent is everywhere. Great teams are built together." copy="A team of HR, payroll and compliance specialists that works as an extension of yours, with the local knowledge to get the details right." points={['Founded as KAPS Consultancy Services in 2015', 'Headquartered in Hyderabad, India', 'Supporting teams in India, the United States, the United Kingdom and Australia']}>
         <Link className="btn" to="/contact">Talk to our team <Arrow /></Link>
         <Link className="btn btn-secondary" to="/how-it-works">Discover our approach</Link>
       </PageHero>
@@ -58,6 +58,7 @@ export default function About() {
           <div className="map reveal" aria-label="World map showing SKAPS presence">
             <img className="map-img" src={worldMap} alt="World map outline" loading="lazy" />
             <span className="map-pin p1"><i /><b>United States</b></span>
+            <span className="map-pin p4 up"><i /><b>United Kingdom</b></span>
             <span className="map-pin p2"><i /><b>India (Headquarters)</b></span>
             <span className="map-pin p3"><i /><b>Australia</b></span>
           </div>
