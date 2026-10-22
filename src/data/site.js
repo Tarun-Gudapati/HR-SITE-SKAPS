@@ -338,8 +338,10 @@ export const faqs = [
   ['How quickly can SKAPS provide staffing support?', 'Timelines depend on the role and volume, but our established talent networks let us respond quickly and shortlist role-ready candidates within days for most requirements.'],
   ['How does SKAPS ensure compliance with labor regulations?', 'Our dedicated compliance team stays current with labor laws and statutory requirements, maintaining accurate documentation and standardized processes across every engagement.'],
   ['Can SKAPS support businesses operating in multiple locations?', 'Yes. We support distributed and multi-location workforces, coordinating payroll, compliance and operations consistently across regions.'],
+  ['Can SKAPS help us set up a Global Capability Centre (GCC) in India?', 'Yes. Through our Global Workforce Solutions and COE services, we help global companies set up and run a GCC in India: legal-entity and compliance setup, a ready workspace, hiring the leadership and team, payroll and HR policies, and day-to-day operations. We can also build and run the centre for you and transfer it to your company when you are ready.'],
   ['How does SKAPS use AI in its services?', 'SKAPS Intelligence, our AI layer, assists our consultants with candidate matching and ranking, checks each pay run for anomalies before salaries are released, monitors statutory and labor-law updates, and powers workforce analytics. A SKAPS consultant reviews every AI recommendation before it reaches you.'],
   ['Is my employee data safe with SKAPS AI?', 'Yes. Employee and payroll data is used only to deliver your engagement, access is role-based, every automated action is logged, and your data is never used to train third-party AI models.'],
+  ['Can SKAPS help us hire AI and data talent?', 'Yes. Our AI & Analytics Talent practice keeps a ready, pre-vetted pool of ML, GenAI, MLOps, data and analytics professionals. Practitioners assess each candidate on the tools in your stack, and you can hire them permanently, on contract, or as a dedicated AI team.'],
 ]
 
 // "AI at work" panel on the home page: one illustrative run per workflow.
