@@ -30,6 +30,9 @@ export const ADDRESS = 'First Floor, ARD Magnum, Door No: 12-7-134/MH/2 in Sy. N
 export const REGIONS = ['United States', 'India (Headquarters)', 'Australia']
 export const YEARS = '10+'
 
+// Announcement bar above the header on every page: [bold label, message]
+export const NOTICE = ['Important Notice', 'SKAPS HR Solutions strictly adheres to ethical recruitment practices. We do NOT charge candidates for placements and do NOT engage any third-party agents to collect fees on our behalf.']
+
 export const clientLogos = [
   [gyansys, 'GyanSys'], [kanerika, 'Kanerika'], [safe, 'Safe Financial'], [snowrelic, 'SnowRelic'],
   [squizify, 'Squizify'], [ivymobility, 'Ivy Mobility'], [microchip, 'Microchip'],
@@ -65,6 +68,13 @@ export const services = [
     points: ['Extensive professional and industry networks', 'Proactive, targeted candidate outreach', 'Confidential and time-sensitive delivery', 'Rigorous pre-qualification and quality assurance'],
     nav: 'Senior leaders who drive outcomes',
     ai: ['AI talent mapping', 'SKAPS Intelligence maps leadership talent across companies and markets, so we approach the right executives first.'],
+    uses: [
+      ['First leadership hire in India', 'Appoint a country head or site leader who can build and run your India operation.', 'flag'],
+      ['Succession planning', 'Line up ready-now successors for critical roles before a planned retirement or exit.', 'calendar'],
+      ['Building a leadership bench', 'Add CXO and VP talent ahead of a funding round, expansion or restructuring.', 'rocket'],
+      ['Niche technical leadership', 'Find engineering, data and AI heads where the qualified pool is small and rarely job-hunting.', 'chip'],
+      ['Board and advisory roles', 'Identify independent directors and advisors with the sector experience your board lacks.', 'briefcase'],
+    ],
   },
   {
     slug: 'recruitment-process', group: 'Talent', icon: 'people', accent: 'lime',
@@ -73,6 +83,13 @@ export const services = [
     points: ['Requirement consultation and role definition', 'Job descriptions and interview planning', 'Candidate screening and shortlisting', 'Selection, induction, and onboarding support'],
     nav: 'Identify, evaluate, select and onboard',
     ai: ['AI screening & ranking', 'Every applicant is screened and ranked against the role scorecard, so consultants spend time only on the strongest fits.'],
+    uses: [
+      ['High-volume hiring drives', 'Fill dozens of similar roles at once for a new project, shift or location.', 'people'],
+      ['Opening a new office', 'Staff a new branch or delivery center from the first hire to a full team.', 'building'],
+      ['Campus and early-career hiring', 'Run graduate intake programs with structured assessments and joining plans.', 'book'],
+      ['Hard-to-fill specialist roles', 'Reach passive candidates for skills that job boards rarely surface.', 'target'],
+      ['Replacing a stretched in-house process', 'Hand off end-to-end hiring when your team cannot keep pace with open roles.', 'clock'],
+    ],
   },
   {
     slug: 'staffing-solutions', group: 'Talent', icon: 'building', accent: 'purple',
@@ -81,6 +98,13 @@ export const services = [
     points: ['Remote HR expertise that extends your team', 'A dedicated on-site HR partner', 'Customized strategies aligned with business goals'],
     nav: 'Contract, temporary and dedicated teams',
     ai: ['AI demand forecasting', 'Headcount forecasts flag when you will need to scale up or down, before projects slip.'],
+    uses: [
+      ['Project-based teams', 'Bring in contract professionals for a fixed-scope delivery and release them when it ends.', 'briefcase'],
+      ['Seasonal demand peaks', 'Add temporary staff for festive, year-end or launch spikes without permanent headcount.', 'calendar'],
+      ['Long-leave cover', 'Keep critical seats filled while employees are away on parental or extended leave.', 'clock'],
+      ['Try before you hire', 'Start roles on contract and convert strong performers to permanent employees.', 'people'],
+      ['Working through a hiring freeze', 'Keep work moving with contract staff while permanent hiring budgets are on hold.', 'chart'],
+    ],
   },
   {
     slug: 'interview-support', group: 'Talent', icon: 'doc', accent: 'cyan',
@@ -89,6 +113,13 @@ export const services = [
     points: ['Seasoned recruitment expertise', 'Support during peak recruitment periods', 'Help with targeted recruitment campaigns', 'Impartial and professional assessment'],
     nav: 'On-site assessment and selection help',
     ai: ['AI interview kits', 'Role-specific question banks and structured scorecards are generated for every interview loop.'],
+    uses: [
+      ['Walk-in and hiring-day events', 'Run large in-person interview days with trained panelists on the floor.', 'calendar'],
+      ['Training first-time interviewers', 'Coach hiring managers to run consistent, legally sound interviews.', 'book'],
+      ['Final-round culture-fit checks', 'Get an experienced HR view on values and team fit before an offer goes out.', 'heart'],
+      ['Offer and joining follow-through', 'Close candidates with offer discussions and pre-joining check-ins after the last round.', 'mail'],
+      ['Remote and video interviews', 'Run consistent virtual interview loops for candidates in other cities or countries.', 'globe'],
+    ],
   },
   {
     slug: 'hr-consulting', group: 'Advisory & Growth', icon: 'briefcase', accent: 'cyan',
@@ -97,6 +128,13 @@ export const services = [
     points: ['HR policies and procedures', 'Performance-management systems', 'Compensation and benefits planning', 'Organizational change and employee relations'],
     nav: 'Policies, performance and compensation',
     ai: ['HR policy copilot', 'Policy drafts and benchmarks are generated from your context, then refined by SKAPS consultants.'],
+    uses: [
+      ['Building HR from scratch', 'Set up the core HR function for a startup or a newly opened India entity.', 'rocket'],
+      ['Mergers and integrations', 'Harmonize job grades, contracts and culture when two workforces become one.', 'layers'],
+      ['Reducing attrition', 'Diagnose why people leave and fix the drivers behind high turnover.', 'chart'],
+      ['Employee engagement surveys', 'Measure how your people feel and turn the results into a practical action plan.', 'eye'],
+      ['HR health check', 'Get an outside review of how your HR function runs and where it falls short.', 'help'],
+    ],
   },
   {
     slug: 'payroll-management-india', group: 'Payroll & Compliance', icon: 'doc', accent: 'blue',
@@ -105,6 +143,13 @@ export const services = [
     points: ['Proactive support and legislative updates', 'A dedicated personal manager', 'Strict employee-data confidentiality', 'Secure ERP access to payslips and leave information'],
     nav: 'ISO-certified Indian payroll, on one platform',
     ai: ['Payroll anomaly detection', 'Every pay run is scanned for salary, deduction and attendance outliers before it is finalized.'],
+    uses: [
+      ['Moving off spreadsheets', 'Replace manual salary sheets with a controlled, repeatable monthly pay run.', 'doc'],
+      ['Switching payroll providers', 'Migrate employee and year-to-date data mid-year without a missed or wrong payment.', 'layers'],
+      ['Teams across Indian states', 'Apply the right professional tax and labour welfare rules wherever your employees work.', 'map'],
+      ['Full and final settlements', 'Settle exits accurately, including leave encashment, gratuity and recoveries.', 'briefcase'],
+      ['Year-end tax season', 'Handle investment declarations, proofs and Form 16 without the annual scramble.', 'calendar'],
+    ],
   },
   {
     slug: 'us-payroll-services', group: 'Payroll & Compliance', icon: 'chart', accent: 'lime',
@@ -112,7 +157,14 @@ export const services = [
     detail: 'SKAPS handles complex federal, state, and local payroll requirements for US workforces, delivering accurate and timely processing while your team concentrates on business operations.',
     points: ['Wages, deductions, and withholdings', 'Federal, state, and local tax filings', 'Direct deposits and paystubs', 'Year-end forms and new-hire reporting'],
     nav: 'Federal, state and local payroll compliance',
-    ai: ['Multi-state tax watch', 'Federal, state and local rate changes are tracked automatically, with filing deadlines flagged in advance.'],
+    ai: ['Multi-state tax watch', 'Tax rate changes are tracked automatically for every state and city you pay in, with deadlines flagged in advance.'],
+    uses: [
+      ['Your first US employee', 'Get payroll running correctly from the first paycheck for a new US team.', 'flag'],
+      ['India-based companies with US staff', 'Pay US employees compliantly while your finance team stays in India.', 'globe'],
+      ['Bonus and off-cycle runs', 'Process bonuses, commissions and corrections outside the regular pay schedule.', 'clock'],
+      ['Fixing past payroll errors', 'Correct misclassified wages and amend prior returns before they turn into penalties.', 'alert'],
+      ['Contractors and employees together', 'Pay 1099 contractors and W-2 employees side by side, each the right way.', 'people'],
+    ],
   },
   {
     slug: 'training-development', group: 'Advisory & Growth', icon: 'spark', accent: 'purple',
@@ -121,6 +173,13 @@ export const services = [
     points: ['Leadership-development programs', 'Skill-enhancement workshops', 'Communication and teamwork training', 'Performance coaching and mentoring'],
     nav: 'Workshops, e-learning and coaching',
     ai: ['AI skill-gap analysis', 'Skill gaps are mapped across teams and turned into personalised learning paths.'],
+    uses: [
+      ['Faster ramp-up for new joiners', 'Shorten time-to-productivity with a structured induction curriculum.', 'rocket'],
+      ['POSH and workplace-conduct training', 'Run mandatory awareness sessions with attendance records you can show an auditor.', 'shield'],
+      ['Upskilling for new technology', 'Retrain teams when you adopt new tools, platforms or AI workflows.', 'chip'],
+      ['Client-facing teams', 'Build service and sales skills for front-line and customer-facing staff.', 'heart'],
+      ['Measuring training impact', 'Track completion, assessment scores and on-the-job results after each program.', 'chart'],
+    ],
   },
   {
     slug: 'compliance-legal', group: 'Payroll & Compliance', icon: 'shield', accent: 'purple',
@@ -129,6 +188,13 @@ export const services = [
     points: ['Comprehensive compliance audit', 'Detailed strengths-and-gaps report', 'Clear and actionable improvement plan', 'Ongoing monthly compliance management'],
     nav: 'Labor law adherence, audits and monitoring',
     ai: ['Compliance watchtower', 'Statutory and labor-law updates are tracked and translated into a clear action list for your team.'],
+    uses: [
+      ['Preparing for a labour inspection', 'Get registers, returns and records in order before an inspector visits.', 'eye'],
+      ['Due diligence before a deal', 'Surface HR and statutory liabilities before an acquisition or investment closes.', 'briefcase'],
+      ['Contract labour oversight', 'Confirm vendors meet PF, ESI and wage obligations for workers on your site.', 'people'],
+      ['Responding to a notice', 'Get clear guidance and a documented reply when an authority raises a query or penalty.', 'mail'],
+      ['Expanding into a new state', 'Complete registrations such as shops and establishments before you hire there.', 'map'],
+    ],
   },
   {
     slug: 'hr-technology', group: 'Advisory & Growth', icon: 'chart', accent: 'blue',
@@ -137,6 +203,13 @@ export const services = [
     points: ['HRIS implementation and optimization', 'Applicant Tracking System setup', 'Performance-management software integration', 'Payroll, analytics, and reporting tools'],
     nav: 'HRIS, ATS, analytics and AI tooling',
     ai: ['AI-ready HR stack', 'HRIS, ATS and analytics set up with AI assistants and automations built in from day one.'],
+    uses: [
+      ['Replacing spreadsheets and email', 'Move leave, attendance and employee records into one system of record.', 'doc'],
+      ['Switching HR platforms', 'Migrate data and workflows from a legacy HRMS without losing history.', 'layers'],
+      ['Connecting disconnected tools', 'Link HR, payroll, finance and identity systems so data is entered once.', 'cloud'],
+      ['Driving adoption after go-live', 'Train admins and employees so the new system actually gets used.', 'people'],
+      ['Choosing the right vendor', 'Compare HR platforms against your requirements and budget before you sign.', 'target'],
+    ],
   },
   {
     slug: 'global-workforce', group: 'Advisory & Growth', icon: 'globe', accent: 'cyan',
@@ -145,6 +218,13 @@ export const services = [
     points: ['Legal-entity and compliance setup', 'Talent acquisition and onboarding', 'Localized HR-policy development', 'Remote and hybrid model consulting'],
     nav: 'Enter India with a compliant team',
     ai: ['India market intelligence', 'Salary benchmarks, talent density and hiring timelines for Indian cities, before you commit.'],
+    uses: [
+      ['Hiring before your entity is ready', 'Employ your first people in India while your legal entity is still being set up.', 'flag'],
+      ['Building a dedicated India team', 'Stand up a captive engineering, product or GCC team that works only for you.', 'chip'],
+      ['Converting contractors to employees', 'Move long-term India contractors onto compliant payroll before misclassification becomes a risk.', 'people'],
+      ['Growing beyond one city', 'Add teams in Hyderabad, Bengaluru, Pune or Chennai with the same HR standards everywhere.', 'map'],
+      ['India payroll for a global HQ', 'Pay your India team locally while reporting costs in the format your headquarters uses.', 'globe'],
+    ],
   },
   {
     slug: 'coe-coworking', group: 'Advisory & Growth', icon: 'building', accent: 'lime',
@@ -153,6 +233,13 @@ export const services = [
     points: ['Strategic location and site selection', 'Office infrastructure and IT support', 'Legal and regulatory compliance', 'Co-working and COE operational support'],
     nav: 'Centers of Excellence and workspaces',
     ai: ['Location intelligence', 'Data-led site selection compares talent pools, costs and infrastructure across cities.'],
+    uses: [
+      ['Landing a pilot team', 'Start a small team in flexible shared seats before committing to a long-term lease.', 'rocket'],
+      ['Graduating to your own office', 'Move a growing team from shared seats into a dedicated, branded workspace.', 'flag'],
+      ['Consolidating scattered teams', 'Bring employees spread across cities or vendor sites under one roof.', 'layers'],
+      ['Backup and continuity sites', 'Set up a second India location so delivery continues if one site goes down.', 'shield'],
+      ['Hybrid-ready workspaces', 'Size seats, meeting rooms and desk booking for teams in the office part of the week.', 'calendar'],
+    ],
   },
 ]
 

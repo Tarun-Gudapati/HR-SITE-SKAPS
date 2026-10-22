@@ -64,6 +64,7 @@
   --container-text: 644px;
   --gutter: 24px;
   --nav-h: 80px;
+  --notice-h: 36px; /* height of the notice bar above the header; updated at runtime by NoticeBar */
 
   /* Section gradients (remote.com structure, SKAPS colours — kept soft for a minimal feel) */
   --g-hero: linear-gradient(180deg, var(--purple-900) 0%, var(--purple-600) 42%, var(--cyan-100) 82%, var(--cyan-50) 100%);

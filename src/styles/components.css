@@ -69,6 +69,25 @@
 .tag { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--stroke-soft); background: #fff; font-size: 13px; font-weight: 500; }
 .badge-new { display: inline-block; background: var(--ink); color: var(--on-dark); font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle; letter-spacing: .02em; }
 
+/* ---------- Notice bar (in normal flow above the sticky header, so it scrolls away) ---------- */
+.notice { background: var(--ink); color: var(--on-dark); font-size: 13px; line-height: 18px; letter-spacing: .005em; }
+.notice-view { overflow: hidden; }
+.notice-track { display: flex; justify-content: center; }
+.notice-copy { flex: none; padding: 9px 24px; white-space: nowrap; }
+.notice-copy strong { font-weight: 700; color: #fff; }
+.notice.is-ticker .notice-view { -webkit-mask: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent); mask: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent); }
+.notice.is-ticker .notice-track { justify-content: flex-start; width: max-content; animation: notice var(--notice-dur, 40s) linear infinite; }
+.notice.is-ticker .notice-copy { margin-right: 48px; }
+.notice:hover .notice-track { animation-play-state: paused; }
+@keyframes notice { to { transform: translateX(-50%); } }
+@media (max-width: 640px) { .notice-copy { padding-inline: 16px; } }
+@media (prefers-reduced-motion: reduce) {
+  .notice.is-ticker .notice-view { -webkit-mask: none; mask: none; }
+  .notice.is-ticker .notice-track { animation: none; width: auto; justify-content: center; }
+  .notice-copy { flex: 0 1 auto; white-space: normal; text-align: center; }
+  .notice-copy[aria-hidden] { display: none; }
+}
+
 /* ---------- Header ---------- */
 .site-header { position: sticky; top: 0; z-index: 60; height: var(--nav-h); padding: var(--inset) var(--inset) 0; pointer-events: none; }
 .nav-bar { pointer-events: auto; position: relative; height: 70px; display: flex; align-items: center; gap: 24px; padding: 0 44px; border-radius: var(--r) var(--r) 0 0; color: var(--ink); transition: background var(--d-hover-in) var(--ease-enter), color var(--d-hover-in) var(--ease-enter), box-shadow var(--d-hover-in) var(--ease-enter); }
@@ -113,7 +132,7 @@
 .nav-bar { z-index: 2; }
 /* Dimmed page behind an open mega menu: click (or drift the pointer onto it) to close. */
 .mega-backdrop { pointer-events: auto; position: fixed; inset: 0; z-index: 1; background: rgba(13, 43, 62, .28); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); cursor: pointer; animation: fadeIn .2s var(--ease-enter); }
-.mega { pointer-events: auto; position: absolute; z-index: 2; left: var(--inset); right: var(--inset); top: calc(var(--inset) + 70px); max-height: calc(100vh - var(--nav-h) - 24px); overflow-y: auto; background: #fff; color: var(--ink); border-radius: 0 0 var(--r) var(--r); box-shadow: 0 30px 60px -20px rgba(20, 25, 30, .35); display: grid; grid-template-columns: 1fr 280px; gap: 24px; padding: 24px 44px 28px; animation: megaIn .22s var(--ease-enter); }
+.mega { pointer-events: auto; position: absolute; z-index: 2; left: var(--inset); right: var(--inset); top: calc(var(--inset) + 70px); max-height: calc(100vh - var(--nav-h) - var(--notice-h) - 24px); overflow-y: auto; background: #fff; color: var(--ink); border-radius: 0 0 var(--r) var(--r); box-shadow: 0 30px 60px -20px rgba(20, 25, 30, .35); display: grid; grid-template-columns: 1fr 280px; gap: 24px; padding: 24px 44px 28px; animation: megaIn .22s var(--ease-enter); }
 .mega-close { position: absolute; top: 12px; right: 14px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; color: var(--text-2); transition: background var(--d-hover-out), color var(--d-hover-out); }
 .mega-close:hover { background: var(--grey-100); color: var(--ink); }
 /* Hover preview: panel is display-only (pointer leaving the button closes it); click pins it and makes it interactive. */

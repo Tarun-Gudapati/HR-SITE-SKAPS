@@ -38,11 +38,24 @@ export default function Solutions() {
         </div>
       </section>
 
-      <section className="section" style={{ background: 'var(--grey-50)' }}>
+      <section className="section uc-section">
         <div className="container">
-          <SectionHead center={false} eyebrow="By use case" title="Whatever you are trying to do, there is a SKAPS solution for it." />
-          <div className="usecase-grid">
-            {useCases.map(([t, d, icon, to]) => <Link to={to} className="usecase reveal" key={t}><span className="ico-box"><Icon name={icon} /></span><div><strong>{t}</strong><p>{d}</p></div><span className="card-link">Explore <Arrow style={{ width: 14, height: 14 }} /></span></Link>)}
+          <SectionHead
+            center={false}
+            className="uc-head"
+            eyebrow="By use case"
+            title="Whatever you are trying to do, there is a SKAPS solution for it."
+            cta={<div className="uc-aside reveal"><p>Not sure where to start? Tell us the outcome and we will map the right mix.</p><Link to="/contact" className="btn btn-secondary btn-sm">Talk to SKAPS <Arrow /></Link></div>}
+          />
+          <div className="uc-grid">
+            {useCases.map(([t, d, icon, to], i) => (
+              <Link to={to} className={`uc-card reveal ${i % 2 ? 'is-green' : 'is-blue'}`} key={t}>
+                <span className="uc-ico"><Icon name={icon} /></span>
+                <h3 className="uc-title">{t}</h3>
+                <p className="uc-desc">{d}</p>
+                <span className="uc-more" aria-hidden="true">Explore <Arrow style={{ width: 14, height: 14 }} /></span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

@@ -59,7 +59,7 @@ export default function AI() {
           <span className="eyebrow" style={{ fontFamily: 'var(--mono)', color: 'rgba(255,255,255,.7)' }}>HOW IT HELPS</span>
           <h2 className="t-h2" style={{ marginTop: 12, marginBottom: 40 }}>Six ways SKAPS Intelligence works for you</h2>
           <div className="dev-three">
-            {aiPillars.map(([t, d, icon], i) => <div key={t}><span className="num">0{i + 1}</span><Icon name={icon} style={{ marginBottom: 8 }} /><h3 className="t-h3">{t}</h3><p style={{ marginTop: 8, color: 'rgba(255,255,255,.8)', fontSize: 14 }}>{d}</p></div>)}
+            {aiPillars.map(([t, d, icon], i) => <div className="dev-feat" key={t}><div className="dev-feat-head"><span className="dev-feat-ico"><Icon name={icon} /></span><span className="num">0{i + 1}</span></div><h3 className="t-h3">{t}</h3><p>{d}</p></div>)}
           </div>
           <div className="stat-row" style={{ marginTop: 64 }}>{aiStats.map(([n, l]) => <div key={l}><strong className="t-stat">{n}</strong><p style={{ color: 'rgba(255,255,255,.75)' }}>{l}</p></div>)}</div>
         </div>

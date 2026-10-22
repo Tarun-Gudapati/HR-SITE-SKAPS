@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import Icon from './Icon'
 import { Crystal, Iso } from './Art'
 import { menus, topLinks } from '../data/nav'
-import { BRAND, PHONE, PHONE_TEL } from '../data/site'
+import { BRAND, NOTICE, PHONE, PHONE_TEL } from '../data/site'
 import { useUI } from './Layout'
 import skapsMark from '../assets/skaps-mark.png'
 
@@ -44,6 +44,36 @@ function Promo({ promo, onNavigate }) {
       <Link className="link" to={promo.to} onClick={onNavigate}>{promo.cta} <Icon name="arrow" className="arrow" style={{ width: 14, height: 14 }} /></Link>
       {promo.art === 'crystal' && <Crystal accent={promo.accent} />}
     </aside>
+  )
+}
+
+// Static and centred when the message fits on one line; otherwise a slow ticker (two copies, shifted by half to loop).
+function NoticeBar() {
+  const bar = useRef(), view = useRef(), copy = useRef()
+  const [ticker, setTicker] = useState(false)
+  const [dur, setDur] = useState(40)
+  useLayoutEffect(() => {
+    const fit = () => {
+      const w = copy.current.offsetWidth
+      setTicker(w > view.current.clientWidth)
+      setDur(Math.max(20, Math.round(w / 45)))
+      document.documentElement.style.setProperty('--notice-h', `${bar.current.offsetHeight}px`)
+    }
+    fit()
+    const ro = new ResizeObserver(fit)
+    ro.observe(view.current); ro.observe(copy.current)
+    return () => ro.disconnect()
+  }, [])
+  const text = <><strong>{NOTICE[0]}:</strong> {NOTICE[1]}</>
+  return (
+    <div ref={bar} className={`notice${ticker ? ' is-ticker' : ''}`} role="note" aria-label={NOTICE[0]}>
+      <div ref={view} className="notice-view">
+        <div className="notice-track" style={{ '--notice-dur': `${dur}s` }}>
+          <p ref={copy} className="notice-copy">{text}</p>
+          {ticker && <p className="notice-copy" aria-hidden="true">{text}</p>}
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -99,6 +129,8 @@ export default function Header({ polarity }) {
   const isPinned = !!active && pinned === active.label
 
   return (
+    <>
+    <NoticeBar />
     <header className="site-header">
       <div className={barClass} data-polarity={polarity}>
         <Brand />
@@ -170,5 +202,6 @@ export default function Header({ polarity }) {
         </div>
       )}
     </header>
+    </>
   )
 }
