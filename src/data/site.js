@@ -22,9 +22,10 @@ export const BRAND = 'SKAPS'
 export const BRAND_FULL = 'SKAPS HR SOLUTIONS'
 export const LEGAL_NAME = 'SKAPS HR Solutions Private Limited'
 
-// TODO(Skaps): replace with the new phone number (display + tel: value).
-export const PHONE = '+91 8500004521'
-export const PHONE_TEL = PHONE.replace(/\s+/g, '')
+// The first number is the primary one, used wherever only a single number is shown.
+export const PHONES = [['+91 70327 04521', 'Primary'], ['+91 85000 04521', 'Alternate']].map(([display, label]) => ({ display, label, tel: display.replace(/\s+/g, '') }))
+export const PHONE = PHONES[0].display
+export const PHONE_TEL = PHONES[0].tel
 export const EMAIL = 'info@skaps.co.in'
 export const ADDRESS = 'First Floor, ARD Magnum, Door No: 12-7-134/MH/2 in Sy. No: 1011/10(P), Anjaneya Nagar, Green Hills Road, Phase 4, Near Moosa Peta, Hyderabad – 500018'
 export const REGIONS = ['United States', 'India (Headquarters)', 'Australia']
@@ -62,6 +63,21 @@ export const advantages = [
 
 export const services = [
   {
+    slug: 'hr-consulting', group: 'Advisory & Growth', icon: 'briefcase', accent: 'cyan',
+    title: 'HR Consulting', summary: 'Expert advisory and strategic solutions for complex human-resources challenges.',
+    detail: 'SKAPS provides strategic guidance and practical solutions that help organizations strengthen HR operations, solve complex people challenges, and maintain regulatory compliance.',
+    points: ['HR policies and procedures', 'Performance-management systems', 'Compensation and benefits planning', 'Organizational change and employee relations'],
+    nav: 'Policies, performance and compensation',
+    ai: ['HR policy copilot', 'Policy drafts and benchmarks are generated from your context, then refined by SKAPS consultants.'],
+    uses: [
+      ['Building HR from scratch', 'Set up the core HR function for a startup or a newly opened India entity.', 'rocket'],
+      ['Mergers and integrations', 'Harmonize job grades, contracts and culture when two workforces become one.', 'layers'],
+      ['Reducing attrition', 'Diagnose why people leave and fix the drivers behind high turnover.', 'chart'],
+      ['Employee engagement surveys', 'Measure how your people feel and turn the results into a practical action plan.', 'eye'],
+      ['HR health check', 'Get an outside review of how your HR function runs and where it falls short.', 'help'],
+    ],
+  },
+  {
     slug: 'executive-search', group: 'Talent', icon: 'target', accent: 'blue',
     title: 'Executive Search', summary: 'Identifying and securing top-tier senior leaders who drive business outcomes and lasting transformation.',
     detail: 'SKAPS goes beyond advertised job postings to identify and engage senior-level leaders who can deliver meaningful business results and sustainable organizational change.',
@@ -75,6 +91,12 @@ export const services = [
       ['Niche technical leadership', 'Find engineering, data and AI heads where the qualified pool is small and rarely job-hunting.', 'chip'],
       ['Board and advisory roles', 'Identify independent directors and advisors with the sector experience your board lacks.', 'briefcase'],
     ],
+  },
+  // Has its own page (src/pages/AITalent.jsx, content in `aiTalent` below), so it skips the ServicePage template fields.
+  {
+    slug: 'ai-analytics-talent', group: 'Talent', icon: 'ai', accent: 'purple', badge: 'New',
+    title: 'AI & Analytics Talent', summary: 'A ready, pre-vetted pool of ML, GenAI, MLOps, data and analytics professionals, interview-ready in days.',
+    nav: 'ML, GenAI, data and analytics experts',
   },
   {
     slug: 'recruitment-process', group: 'Talent', icon: 'people', accent: 'lime',
@@ -119,21 +141,6 @@ export const services = [
       ['Final-round culture-fit checks', 'Get an experienced HR view on values and team fit before an offer goes out.', 'heart'],
       ['Offer and joining follow-through', 'Close candidates with offer discussions and pre-joining check-ins after the last round.', 'mail'],
       ['Remote and video interviews', 'Run consistent virtual interview loops for candidates in other cities or countries.', 'globe'],
-    ],
-  },
-  {
-    slug: 'hr-consulting', group: 'Advisory & Growth', icon: 'briefcase', accent: 'cyan',
-    title: 'HR Consulting', summary: 'Expert advisory and strategic solutions for complex human-resources challenges.',
-    detail: 'SKAPS provides strategic guidance and practical solutions that help organizations strengthen HR operations, solve complex people challenges, and maintain regulatory compliance.',
-    points: ['HR policies and procedures', 'Performance-management systems', 'Compensation and benefits planning', 'Organizational change and employee relations'],
-    nav: 'Policies, performance and compensation',
-    ai: ['HR policy copilot', 'Policy drafts and benchmarks are generated from your context, then refined by SKAPS consultants.'],
-    uses: [
-      ['Building HR from scratch', 'Set up the core HR function for a startup or a newly opened India entity.', 'rocket'],
-      ['Mergers and integrations', 'Harmonize job grades, contracts and culture when two workforces become one.', 'layers'],
-      ['Reducing attrition', 'Diagnose why people leave and fix the drivers behind high turnover.', 'chart'],
-      ['Employee engagement surveys', 'Measure how your people feel and turn the results into a practical action plan.', 'eye'],
-      ['HR health check', 'Get an outside review of how your HR function runs and where it falls short.', 'help'],
     ],
   },
   {
@@ -243,29 +250,51 @@ export const services = [
   },
 ]
 
-export const serviceGroups = ['Talent', 'Payroll & Compliance', 'Advisory & Growth']
+// Advisory & Growth leads so HR Consulting is the first service in the menu and on /services; Talent (Executive Search first) follows.
+export const serviceGroups = ['Advisory & Growth', 'Talent', 'Payroll & Compliance']
+// Services shown ahead of the four engagement models in the home page "What we do" grid, in this order.
+export const homeServices = ['hr-consulting', 'executive-search', 'ai-analytics-talent']
 export const getService = slug => services.find(s => s.slug === slug)
+export const industryLink = ([, , slug, , to]) => to || `/industries#${slug}`
 
+// [title, icon, slug, description, menu/footer link (optional; defaults to the card on /industries)]
 export const industries = [
-  ['Technology and IT Services', 'target', 'technology-it-services', 'Scale engineering and delivery teams with contract, dedicated and executive hiring.'],
-  ['Financial Services', 'chart', 'financial-services', 'Compliant payroll, statutory reporting and specialist talent for banks, NBFCs and fintechs.'],
-  ['AI, Data & Analytics', 'spark', 'ai-data-analytics', 'Data scientists, ML engineers and analysts sourced with AI-assisted matching for AI-first companies.'],
+  ['Technology and IT Services', 'monitorCode', 'technology-it-services', 'Scale engineering and delivery teams with contract, dedicated and executive hiring.'],
+  ['Financial Services', 'rupee', 'financial-services', 'Compliant payroll, statutory reporting and specialist finance talent for NBFCs and financial institutions.'],
+  ['AI, Data & Analytics', 'nodes', 'ai-data-analytics', 'Data scientists, ML engineers and analysts sourced with AI-assisted matching for AI-first companies.', '/services/ai-analytics-talent'],
   ['Semiconductors & Hardware', 'chip', 'semiconductors-hardware', 'Specialist engineering talent and payroll for chip design and hardware organizations.'],
-  ['Healthcare', 'heart', 'healthcare', 'Credentialed clinical and administrative staffing with strict confidentiality and compliance.'],
-  ['Manufacturing', 'building', 'manufacturing', 'Shop-floor to leadership hiring, contract labor compliance and multi-location payroll.'],
-  ['Retail and E-Commerce', 'briefcase', 'retail-ecommerce', 'Seasonal and temporary staffing that scales with demand peaks and distribution networks.'],
+  ['Healthcare', 'pulse', 'healthcare', 'Credentialed clinical and administrative staffing with strict confidentiality and compliance.'],
+  ['Manufacturing', 'factory', 'manufacturing', 'Shop-floor to leadership hiring, contract labor compliance and multi-location payroll.'],
+  ['Retail and E-Commerce', 'cart', 'retail-ecommerce', 'Seasonal and temporary staffing that scales with demand peaks and distribution networks.'],
   ['SaaS & Software Products', 'cloud', 'saas-software', 'Product, sales and customer-success teams for fast-growing software companies.'],
   ['Banking & Fintech', 'bank', 'banking-fintech', 'Risk, compliance and technology talent with audit-ready payroll and documentation.'],
-  ['Professional Services & Consulting', 'people', 'professional-services', 'Bench management, bill-rate aligned payroll and rapid project staffing.'],
+  ['Professional Services & Consulting', 'briefcase', 'professional-services', 'Bench management, bill-rate aligned payroll and rapid project staffing.'],
   ['Startups and Growing Businesses', 'rocket', 'startups', 'Make your first hires and run payroll from day one, no in-house HR team required.'],
   ['Global Capability Centers (GCC)', 'globe', 'global-capability-centers', 'Set up and run Centers of Excellence in India with end-to-end workforce support.'],
 ]
 
+// Industries page detail, keyed by industry slug: [short label, roles we hire, typical engagements, lead service slug, client logo names]
+// TODO(Skaps): confirm the role lists and add client names per industry (names must match clientLogos).
+export const industryDetails = {
+  'technology-it-services': ['Tech & IT', ['Software engineers', 'DevOps & cloud', 'Delivery managers'], ['Contract staffing', 'Dedicated teams'], 'staffing-solutions'],
+  'financial-services': ['Finance', ['Finance & accounts', 'Risk analysts', 'Operations'], ['Payroll outsourcing', 'Statutory compliance'], 'payroll-management-india'],
+  'ai-data-analytics': ['AI & Data', ['Data scientists', 'ML engineers', 'Data analysts'], ['Contract staffing', 'Dedicated teams'], 'ai-analytics-talent'],
+  'semiconductors-hardware': ['Semiconductors', ['Chip design', 'Verification', 'Embedded systems'], ['Specialist hiring', 'Payroll outsourcing'], 'executive-search', ['Microchip', 'Marvell']],
+  'healthcare': ['Healthcare', ['Clinical staff', 'Medical admin', 'Healthcare IT'], ['Contract staffing', 'Temporary staffing'], 'staffing-solutions'],
+  'manufacturing': ['Manufacturing', ['Shop-floor teams', 'Plant engineers', 'Plant leadership'], ['Contract labor compliance', 'Multi-location payroll'], 'compliance-legal'],
+  'retail-ecommerce': ['Retail', ['Store & warehouse', 'Fulfilment', 'Customer support'], ['Temporary staffing', 'Payroll outsourcing'], 'staffing-solutions'],
+  'saas-software': ['SaaS', ['Product & engineering', 'Sales', 'Customer success'], ['Dedicated teams', 'Contract staffing'], 'recruitment-process'],
+  'banking-fintech': ['Banking', ['Risk & compliance', 'Fintech engineers', 'Audit'], ['Contract staffing', 'Audit-ready payroll'], 'compliance-legal'],
+  'professional-services': ['Consulting', ['Consultants', 'Project staff', 'Bench resources'], ['Bench management', 'Payroll outsourcing'], 'payroll-management-india'],
+  'startups': ['Startups', ['First engineers', 'Founding hires', 'Ops & admin'], ['Payroll from day one', 'HR setup'], 'hr-consulting'],
+  'global-capability-centers': ['GCC', ['Site leadership', 'Engineering pods', 'Shared services'], ['COE setup', 'Dedicated teams'], 'coe-coworking'],
+}
+
 export const benefits = [
-  ['Workforce Flexibility', 'people', 'Scale teams up or down as demand changes without long-term overhead.'],
+  ['Workforce Flexibility', 'people', 'Add or release people as demand changes, without permanent headcount.'],
   ['Cost Efficiency', 'chart', 'Reduce hiring, payroll and compliance costs with one accountable partner.'],
   ['Access to Specialized Talent', 'target', 'Reach role-ready professionals through established talent networks.'],
-  ['Reduced Compliance Risk', 'shield', 'Stay current with labor laws and statutory requirements across regions.'],
+  ['Reduced Compliance Risk', 'shield', 'Fewer penalties and legal complications, in every region you operate in.'],
 ]
 
 export const needs = [
@@ -274,13 +303,6 @@ export const needs = [
   ['Dedicated Teams', 'Build reliable, long-term teams aligned to your operational goals.', 'target', 'dedicated-teams'],
   ['Payroll Outsourcing', 'Hand off payroll processing and compliance to a dependable partner.', 'doc', 'payroll-outsourcing'],
 ]
-
-export const needAI = {
-  'contract-staffing': 'AI-ranked shortlists in days',
-  'temporary-staffing': 'AI demand forecasting for seasonal peaks',
-  'dedicated-teams': 'AI analytics on team performance and attrition',
-  'payroll-outsourcing': 'AI anomaly checks on every pay run',
-}
 
 export const useCases = [
   ['Hire in India', 'Build teams in India without an in-house HR function', 'globe', '/services/global-workforce'],
@@ -291,13 +313,13 @@ export const useCases = [
   ['Scale with AI', 'AI-assisted hiring, payroll and compliance intelligence', 'ai', '/ai'],
 ]
 
-// [number, title, description, AI assist label]
+// [number, title, description]
 export const steps = [
-  ['01', 'Consultation and Workforce Planning', 'We understand your goals, gaps and workforce priorities.', 'AI workforce plan'],
-  ['02', 'Talent Sourcing and Selection', 'We identify and screen role-ready professionals for your team.', 'AI-ranked shortlists'],
-  ['03', 'Onboarding and Documentation', 'We handle onboarding, documentation and statutory formalities.', 'Automated documents'],
-  ['04', 'Payroll and Compliance Management', 'We run accurate payroll and keep operations fully compliant.', 'AI anomaly checks'],
-  ['05', 'Ongoing Workforce Support', 'We measure, improve and continue supporting your growth.', 'Predictive analytics'],
+  ['01', 'Consultation and Workforce Planning', 'We map goals, gaps and priorities with your leadership and HR teams, and agree on an engagement model.'],
+  ['02', 'Talent Sourcing and Selection', 'Our networks and SKAPS Intelligence shortlist role-ready candidates; our consultants pre-qualify every profile.'],
+  ['03', 'Onboarding and Documentation', 'Offer letters, statutory forms and policy acknowledgements are generated, routed and tracked for you.'],
+  ['04', 'Payroll and Compliance Management', 'ISO-certified payroll runs with anomaly checks, filings and audit-ready documentation in each region.'],
+  ['05', 'Ongoing Workforce Support', 'A dedicated personal manager reviews metrics with you and keeps improving the engagement.'],
 ]
 
 export const complianceItems = ['Statutory Compliance Management', 'Labor Law Adherence', 'Employee Benefits Administration', 'Risk Reduction and Documentation']
@@ -316,7 +338,7 @@ export const faqs = [
   ['How quickly can SKAPS provide staffing support?', 'Timelines depend on the role and volume, but our established talent networks let us respond quickly and shortlist role-ready candidates within days for most requirements.'],
   ['How does SKAPS ensure compliance with labor regulations?', 'Our dedicated compliance team stays current with labor laws and statutory requirements, maintaining accurate documentation and standardized processes across every engagement.'],
   ['Can SKAPS support businesses operating in multiple locations?', 'Yes. We support distributed and multi-location workforces, coordinating payroll, compliance and operations consistently across regions.'],
-  ['How does SKAPS use AI in its services?', 'SKAPS Intelligence, our AI layer, assists our consultants with candidate matching and ranking, flags payroll anomalies before a cycle closes, monitors statutory and labor-law updates, and powers workforce analytics. Every AI recommendation is reviewed by an experienced SKAPS professional before it reaches you.'],
+  ['How does SKAPS use AI in its services?', 'SKAPS Intelligence, our AI layer, assists our consultants with candidate matching and ranking, checks each pay run for anomalies before salaries are released, monitors statutory and labor-law updates, and powers workforce analytics. A SKAPS consultant reviews every AI recommendation before it reaches you.'],
   ['Is my employee data safe with SKAPS AI?', 'Yes. Employee and payroll data is used only to deliver your engagement, access is role-based, every automated action is logged, and your data is never used to train third-party AI models.'],
 ]
 
@@ -370,7 +392,7 @@ export const storyAI = [
 ]
 
 export const aiPillars = [
-  ['AI Talent Matching', 'Candidates are matched and ranked against role requirements, skills and culture signals, so shortlists arrive in days, not weeks.', 'target'],
+  ['AI Talent Matching', 'Candidates are matched and ranked against role requirements, skills and culture signals.', 'target'],
   ['Payroll Anomaly Detection', 'Every payroll run is scanned for outliers in salaries, deductions and attendance before it is finalized.', 'doc'],
   ['Compliance Watchtower', 'Statutory, tax and labor-law updates across India, the US and Australia are tracked and translated into actions.', 'shield'],
   ['Workforce Analytics', 'Headcount, cost, attrition and hiring-funnel insights delivered as clear, decision-ready reports.', 'chart'],
@@ -383,7 +405,7 @@ export const aiStats = [['<30 mins', 'for clear compliance guidance, down from s
 export const values = [
   ['Precision', 'Accuracy in every payroll cycle, placement and compliance filing.'],
   ['Integrity', 'The highest ethical standards and strict confidentiality.'],
-  ['Collaboration', 'Great achievements are the result of teamwork, not individual effort.'],
+  ['Collaboration', 'One team across payroll, staffing and compliance, working alongside yours.'],
   ['Innovation', 'AI and automation applied thoughtfully, with people in the loop.'],
   ['Partnership', 'Enduring relationships and measurable positive impact.'],
 ]
@@ -392,3 +414,55 @@ export const values = [
 export const socials = [['LinkedIn', 'linkedin', '#'], ['Facebook', 'facebook', '#'], ['Instagram', 'instagram', '#'], ['Twitter', 'twitter', '#']]
 
 export const footerIntro = 'SKAPS HR Solutions is an AI-powered workforce management and recruitment partner helping organizations streamline hiring, payroll, compliance, and employee management across multiple industries.'
+
+// AI & Analytics Talent page (/services/ai-analytics-talent).
+// TODO(Skaps): wording is qualitative on purpose; add talent-pool size or placement figures only once confirmed.
+export const aiTalent = {
+  // [role, what they do, icon]
+  roles: [
+    ['AI / ML Engineers', 'Build, train and ship machine-learning models into production products.', 'ai'],
+    ['GenAI & LLM Engineers', 'RAG pipelines, agents, fine-tuning and evaluation on modern large language models.', 'spark'],
+    ['MLOps Engineers', 'Model deployment, monitoring and CI/CD for ML on Kubernetes and cloud ML platforms.', 'cloud'],
+    ['Data Scientists', 'Experimentation, forecasting and statistical modelling that answers real business questions.', 'chart'],
+    ['Data Engineers', 'Pipelines, lakehouses and streaming that keep data reliable and ready for AI.', 'layers'],
+    ['Computer Vision & NLP Specialists', 'Image, video, speech and language models for domain-specific problems.', 'eye'],
+    ['Analytics & BI Engineers', 'Semantic layers, dashboards and self-serve reporting that leaders actually use.', 'target'],
+    ['AI Product Managers', 'Product leaders who scope AI features, define evaluation and ship them to users.', 'briefcase'],
+    ['AI Research Scientists', 'Applied researchers for novel models, benchmarking and proof-of-concept work.', 'book'],
+  ],
+  // [group, skills]
+  stack: [
+    ['Languages & ML frameworks', ['Python', 'SQL', 'R', 'Scala', 'PyTorch', 'TensorFlow', 'JAX', 'scikit-learn', 'XGBoost', 'Hugging Face', 'OpenCV', 'spaCy']],
+    ['GenAI & LLMs', ['LangChain', 'LlamaIndex', 'OpenAI & Anthropic APIs', 'Azure OpenAI', 'RAG', 'Vector databases', 'Fine-tuning (LoRA)', 'LLM evaluation', 'Prompt engineering']],
+    ['MLOps & cloud', ['Kubernetes', 'Docker', 'MLflow', 'Kubeflow', 'Airflow', 'AWS SageMaker', 'Google Vertex AI', 'Azure ML', 'Terraform']],
+    ['Data & analytics', ['Databricks', 'Apache Spark', 'Snowflake', 'BigQuery', 'dbt', 'Kafka', 'Power BI', 'Tableau', 'Looker']],
+  ],
+  // [model, description, icon, link, link label]
+  models: [
+    ['Permanent hire', 'Full-time AI and data hires on your payroll, sourced, assessed and closed by SKAPS.', 'people', '/services/recruitment-process', 'Recruitment process'],
+    ['Contract & staff augmentation', 'Add vetted engineers to your team for a project or a sprint, on SKAPS’s compliant payroll.', 'clock', '/services/staffing-solutions', 'Staffing solutions'],
+    ['Dedicated AI pod', 'A ready-made squad, such as ML engineers, a data engineer and an MLOps lead, that works only for you.', 'target', '/solutions#dedicated-teams', 'Dedicated teams'],
+    ['Build-operate-transfer', 'We build and run your India AI team or COE, then transfer the people and operations to you.', 'building', '/services/coe-coworking', 'COE setup'],
+  ],
+  // [number, step, description]
+  vetting: [
+    ['01', 'Role scorecard', 'We agree the problem, stack, seniority and must-have skills with your hiring manager.'],
+    ['02', 'AI-assisted matching', 'SKAPS Intelligence ranks our ready pool and wider networks against the scorecard.'],
+    ['03', 'Technical assessment', 'Hands-on coding, ML system-design and take-home tasks, reviewed by practitioners.'],
+    ['04', 'Project & portfolio review', 'We dig into shipped models, repositories, papers and production impact, not just keywords.'],
+    ['05', 'Interview support', 'Structured panels, scorecards and offer support until your hire joins.'],
+  ],
+  // [point, description, icon]
+  matching: [
+    ['Skills-graph matching', 'Profiles are matched on frameworks, problem domains and production experience, not job titles.', 'target'],
+    ['Ranked shortlists', 'You see the strongest fits first, each with a short note on why they match.', 'chart'],
+    ['Consultant review', 'A SKAPS recruiter who knows AI hiring checks every profile before you do.', 'people'],
+    ['Compliant from day one', 'Contracts, payroll and statutory filings are handled for every placement.', 'shield'],
+  ],
+  faqs: [
+    ['Do you already have AI candidates available?', 'Yes. SKAPS maintains a ready pool of pre-screened AI, ML, data and analytics professionals, so most searches start with people we already know instead of a cold job post.'],
+    ['How quickly can we see profiles?', 'For most roles we share a reviewed shortlist within days of agreeing the role scorecard. Niche research and leadership roles can take longer, and we tell you that upfront.'],
+    ['Can AI engineers work with our team outside India?', 'Yes. Engineers can work remotely with teams in the US, Australia and elsewhere, employed on SKAPS’s compliant India payroll or hired directly by your entity.'],
+    ['How is this different from SKAPS Intelligence?', 'SKAPS Intelligence is the AI we use inside our own hiring, payroll and compliance work. AI & Analytics Talent is the people: the engineers, scientists and analysts we place in your team.'],
+  ],
+}

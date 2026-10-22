@@ -18,12 +18,9 @@ h1, h2, h3, h4 { margin: 0; font-weight: 700; color: var(--text); }
 .t-h1-center { font-size: clamp(34px, 3.9vw, 56px); line-height: 1.04; letter-spacing: -.03em; font-weight: 600; }
 .t-h2 { font-size: clamp(30px, 3.05vw, 44px); line-height: 1.08; letter-spacing: -.03em; font-weight: 600; }
 .t-h3 { font-size: 20px; line-height: 1.2; letter-spacing: -.015em; font-weight: 600; }
-.t-h4 { font-size: 16px; line-height: 1.25; font-weight: 700; }
 .t-stat { font-size: clamp(44px, 5vw, 72px); line-height: .95; letter-spacing: -.03em; font-weight: 700; }
-.t-body { font-size: 16px; line-height: 1.5; }
 .t-body-lg { font-size: 18px; line-height: 1.5; }
 .t-small { font-size: 14px; line-height: 1.45; }
-.t-eyebrow { font-size: 12px; line-height: 1.2; font-weight: 700; letter-spacing: .01em; }
 .t-muted { color: var(--text-2); }
 .t-center { text-align: center; }
 .measure { max-width: var(--container-text); }

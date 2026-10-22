@@ -1,6 +1,6 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { HashRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './styles/index.css'
 import Layout from './components/Layout'
 import Home from './pages/Home'
@@ -10,6 +10,7 @@ import Solutions from './pages/Solutions'
 import Industries from './pages/Industries'
 import About from './pages/About'
 import AI from './pages/AI'
+import AITalent from './pages/AITalent'
 import { HowItWorks, Compliance, Clients, FAQPage, Contact, NotFound } from './pages/Misc'
 
 // HashRouter keeps deep links working on GitHub Pages without server rewrites.
@@ -20,7 +21,9 @@ createRoot(document.getElementById('root')).render(
         <Route element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="services" element={<Services />} />
+          <Route path="services/ai-analytics-talent" element={<AITalent />} />
           <Route path="services/:slug" element={<ServicePage />} />
+          <Route path="ai-talent" element={<Navigate to="/services/ai-analytics-talent" replace />} />
           <Route path="solutions" element={<Solutions />} />
           <Route path="industries" element={<Industries />} />
           <Route path="about" element={<About />} />

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import Icon from './Icon'
 import { Crystal, Iso } from './Art'
 import { menus, topLinks } from '../data/nav'
-import { BRAND, NOTICE, PHONE, PHONE_TEL } from '../data/site'
+import { BRAND, NOTICE, PHONES } from '../data/site'
 import { useUI } from './Layout'
 import skapsMark from '../assets/skaps-mark.png'
 
@@ -17,19 +17,15 @@ export function Brand({ className = '' }) {
 }
 
 function MenuItem({ item, onNavigate }) {
-  const { openDemo } = useUI()
-  const inner = (
-    <>
+  return (
+    <Link className={`mega-item${item.desc ? '' : ' plain'}`} to={item.to} onClick={onNavigate}>
       {item.iso ? <Iso accent={item.iso} /> : item.icon ? <Icon name={item.icon} /> : null}
       <span>
         <strong>{item.title}{item.badge && <span className="badge-new">{item.badge}</span>}</strong>
         {item.desc && <span className="desc">{item.desc}</span>}
       </span>
-    </>
+    </Link>
   )
-  const cls = `mega-item${item.desc ? '' : ' plain'}`
-  if (item.action === 'demo') return <button type="button" className={cls} onClick={() => { onNavigate(); openDemo() }}>{inner}</button>
-  return <Link className={cls} to={item.to} onClick={onNavigate}>{inner}</Link>
 }
 
 function Promo({ promo, onNavigate }) {
@@ -73,6 +69,64 @@ function NoticeBar() {
           {ticker && <p className="notice-copy" aria-hidden="true">{text}</p>}
         </div>
       </div>
+    </div>
+  )
+}
+
+// Same two modes as the mega menu: hover previews the list, click pins it. Closes on outside click, Escape,
+// focus leaving, route change, or when a mega menu opens.
+function CallMenu({ menuOpen, onOpen }) {
+  const [open, setOpen] = useState(null)
+  const root = useRef(), timer = useRef()
+  const { pathname } = useLocation()
+  const shut = () => { clearTimeout(timer.current); setOpen(null) }
+  const show = mode => { clearTimeout(timer.current); onOpen(); setOpen(mode) }
+
+  useEffect(() => { shut() }, [pathname])
+  useEffect(() => { if (menuOpen) shut() }, [menuOpen])
+  useEffect(() => {
+    if (!open) return
+    const onDown = e => { if (!root.current.contains(e.target)) shut() }
+    const onKey = e => {
+      if (e.key !== 'Escape') return
+      if (root.current.contains(document.activeElement)) root.current.querySelector('button').focus()
+      shut()
+    }
+    document.addEventListener('pointerdown', onDown)
+    document.addEventListener('keydown', onKey)
+    return () => { document.removeEventListener('pointerdown', onDown); document.removeEventListener('keydown', onKey) }
+  }, [open])
+
+  const onKeyDown = e => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
+    e.preventDefault()
+    if (!open) show('pinned')
+    const step = e.key === 'ArrowDown' ? 1 : -1
+    requestAnimationFrame(() => {
+      const items = [...root.current.querySelectorAll('.call-pop a')]
+      const i = items.indexOf(document.activeElement)
+      items[i < 0 ? (step > 0 ? 0 : items.length - 1) : (i + step + items.length) % items.length]?.focus()
+    })
+  }
+
+  return (
+    <div className="call-menu" ref={root} onKeyDown={onKeyDown}
+      onMouseEnter={() => (open ? clearTimeout(timer.current) : show('hover'))}
+      onMouseLeave={() => { if (open === 'hover') timer.current = setTimeout(shut, 250) }}
+      onBlur={e => { if (open && !root.current.contains(e.relatedTarget)) shut() }}>
+      <button type="button" className={`nav-call${open === 'pinned' ? ' is-pinned' : ''}`} aria-label="Call us" aria-expanded={!!open} aria-haspopup="true" aria-controls="call-menu" onClick={() => (open === 'pinned' ? shut() : show('pinned'))}>
+        <Icon name="phone" /><span>Call us</span><Icon name="chevron" className="chev" />
+      </button>
+      {open && (
+        <div className="call-pop" id="call-menu">
+          <span className="eyebrow muted">Call SKAPS</span>
+          <ul>
+            {PHONES.map((p, i) => (
+              <li key={p.tel}><a href={`tel:${p.tel}`} onClick={shut}><Icon name="phone" /><span><strong>{p.display}</strong><small className={i ? undefined : 'is-primary'}>{p.label}</small></span></a></li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
@@ -145,8 +199,8 @@ export default function Header({ polarity }) {
           {topLinks.map(l => <li className="nav-item" key={l.to}><Link to={l.to}>{l.label}{l.badge && <span className="nav-badge">{l.badge}</span>}</Link></li>)}
         </ul>
         <div className="nav-right" onMouseEnter={() => enter(null)}>
-          <a className="nav-phone" href={`tel:${PHONE_TEL}`} aria-label={`Call ${PHONE}`} title={PHONE}><Icon name="phone" /><span>{PHONE}</span></a>
-          <button type="button" className="btn btn-primary-nav" onClick={openDemo}>Schedule a consultation <Icon name="arrow" className="arrow" style={{ width: 16, height: 16 }} /></button>
+          <CallMenu menuOpen={open} onOpen={close} />
+          <button type="button" className="btn btn-primary-nav" aria-label="Schedule a consultation" onClick={openDemo}><span>Schedule<span className="nav-cta-more"> a consultation</span></span> <Icon name="arrow" className="arrow" style={{ width: 16, height: 16 }} /></button>
         </div>
         <button type="button" className="burger" aria-label="Open menu" aria-expanded={drawer} onClick={() => setDrawer(true)}><Icon name="menu" /></button>
       </div>
@@ -193,11 +247,11 @@ export default function Header({ polarity }) {
             )}
           </div>
           <div className="drawer-foot">
-            <a className="tag" href={`tel:${PHONE_TEL}`}><span style={{ display: 'inline-flex', gap: 8, alignItems: 'center' }}><Icon name="phone" style={{ width: 18, height: 18 }} />{PHONE}</span><Icon name="chevronRight" style={{ width: 16, height: 16 }} /></a>
-            <div className="row">
-              <Link className="btn btn-secondary" to="/contact" onClick={() => setDrawer(false)}>Contact</Link>
-              <button type="button" className="btn" onClick={() => { setDrawer(false); openDemo() }}>Schedule <Icon name="arrow" className="arrow" style={{ width: 16, height: 16 }} /></button>
+            <span className="eyebrow muted">Call us</span>
+            <div className="drawer-calls">
+              {PHONES.map((p, i) => <a className="tag" key={p.tel} href={`tel:${p.tel}`}><Icon name="phone" /><span><small className={i ? undefined : 'is-primary'}>{p.label}</small>{p.display}</span></a>)}
             </div>
+            <button type="button" className="btn btn-block" onClick={() => { setDrawer(false); openDemo() }}>Schedule a consultation <Icon name="arrow" className="arrow" style={{ width: 16, height: 16 }} /></button>
           </div>
         </div>
       )}

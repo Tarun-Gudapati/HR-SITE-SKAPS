@@ -69,7 +69,7 @@ export default function AIWorkflow() {
       <div className="wf-copy">
         <span className="eyebrow" style={{ color: 'var(--dev-cyan)' }}>SKAPS Intelligence</span>
         <h2 className="t-h2">AI works inside every engagement.</h2>
-        <p>Our consultants work alongside an AI layer that sources candidates, checks every payslip and watches the law for you. A SKAPS specialist signs off every decision.</p>
+        <p>Our consultants work alongside an AI layer that sources candidates, checks every payslip and watches the law for you.</p>
         <div className="wf-tabs" role="tablist" aria-label="AI workflows">
           {aiWorkflows.map((w, i) => (
             <button key={w.key} type="button" role="tab" aria-selected={i === idx} className={i === idx ? 'on' : ''} onClick={() => select(i)}>

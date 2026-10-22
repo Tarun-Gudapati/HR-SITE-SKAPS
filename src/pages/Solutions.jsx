@@ -6,17 +6,17 @@ import { Arrow, PageHero, CloseLine, SectionHead, DemoButton } from '../componen
 import { needs, benefits, useCases, advantages, pains } from '../data/site'
 
 const needDetail = {
-  'contract-staffing': ['Defined project timelines and workloads', 'SKAPS handles payroll, documentation and compliance', 'Scale teams up or down as needs change'],
-  'temporary-staffing': ['Seasonal peaks and short-term demand', 'No long-term overhead', 'Role-ready professionals within days'],
-  'dedicated-teams': ['Long-term teams aligned to operational goals', 'A dedicated on-site or remote HR partner', 'Customized strategies aligned with business goals'],
-  'payroll-outsourcing': ['Accurate, timely and fully compliant processing', 'Reduced administrative overhead and statutory risk', 'Secure ERP access to payslips and leave information'],
+  'contract-staffing': ['Sourced, screened and onboarded by SKAPS', 'Payroll, documentation and compliance handled for you', 'Scale up or down as your needs change'],
+  'temporary-staffing': ['Role-ready professionals within days', 'Festive, year-end and launch spikes covered', 'Released when the peak is over'],
+  'dedicated-teams': ['A dedicated on-site or remote HR partner', 'Engineering, product or GCC teams that work only for you', 'Payroll and compliance run by SKAPS'],
+  'payroll-outsourcing': ['Accurate, timely and fully compliant processing', 'Reduced administrative overhead and statutory risk', 'Full and final settlements and year-end tax handled'],
 }
 
 export default function Solutions() {
   usePolarity('default')
   return (
     <>
-      <PageHero theme="blue" eyebrow="Tailored solutions" title="Workforce Solutions Designed Around Your Business Needs." copy="Choose the engagement model that fits how your organization scales. A practical model that keeps your teams agile, cost-efficient and compliant." points={['Contract, temporary and dedicated teams', 'Payroll outsourcing for India and the US', 'One accountable partner across regions']} />
+      <PageHero eyebrow="Tailored solutions" title="Workforce Solutions Designed Around Your Business Needs." copy="Choose the engagement model that fits how your organization scales, from a single contractor to fully outsourced payroll." points={['Contract, temporary and dedicated teams', 'Payroll outsourcing with compliance built in', 'AI checks built into every model']} />
 
       <section className="section">
         <div className="container">
@@ -45,7 +45,7 @@ export default function Solutions() {
             className="uc-head"
             eyebrow="By use case"
             title="Whatever you are trying to do, there is a SKAPS solution for it."
-            cta={<div className="uc-aside reveal"><p>Not sure where to start? Tell us the outcome and we will map the right mix.</p><Link to="/contact" className="btn btn-secondary btn-sm">Talk to SKAPS <Arrow /></Link></div>}
+            cta={<div className="uc-aside reveal"><p>Not sure where to start? Tell us the outcome and we will map the right mix.</p><DemoButton className="btn btn-secondary btn-sm">Get a recommendation</DemoButton></div>}
           />
           <div className="uc-grid">
             {useCases.map(([t, d, icon, to], i) => (
@@ -76,7 +76,7 @@ export default function Solutions() {
         </div>
       </section>
 
-      <CloseLine>Not sure which engagement fits?</CloseLine>
+      <CloseLine>Know which model you need?</CloseLine>
     </>
   )
 }

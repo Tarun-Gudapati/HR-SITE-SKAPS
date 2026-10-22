@@ -17,36 +17,6 @@ const palettes = {
   orange: ['#7a4a05', '#c07d12', '#f0a92a', '#f7cf7a', '#fdf0d5'],
 }
 
-/** Isometric cube with glowing gradient faces + thin wireframe shell (hero / page-hero art). */
-export function Cube({ accent = 'blue', glow = 'lime', className = '', style }) {
-  const p = palettes[accent] || palettes.blue
-  const g = palettes[glow] || palettes.lime
-  const a = id('cf'), b = id('cg'), c = id('ch'), d = id('cglow')
-  return (
-    <svg viewBox="0 0 400 400" className={`art ${className}`} style={style} aria-hidden="true">
-      <defs>
-        <linearGradient id={a} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor={p[3]} /><stop offset="1" stopColor={p[1]} /></linearGradient>
-        <linearGradient id={b} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor={p[4]} /><stop offset="1" stopColor={p[2]} /></linearGradient>
-        <linearGradient id={c} x1="1" y1="0" x2="0" y2="1"><stop offset="0" stopColor={p[2]} /><stop offset="1" stopColor={p[0]} /></linearGradient>
-        <radialGradient id={d}><stop offset="0" stopColor={g[3]} /><stop offset=".6" stopColor={g[2]} /><stop offset="1" stopColor={g[2]} stopOpacity="0" /></radialGradient>
-      </defs>
-      {/* back wireframe cube */}
-      <g fill="none" stroke="#fff" strokeOpacity=".7" strokeWidth="1.2">
-        <path d="M60 150 200 70l140 80-140 80z" /><path d="M60 150v120l140 80V230M340 150v120L200 350" /><path d="M200 70v160" />
-      </g>
-      {/* glowing core */}
-      <circle cx="200" cy="200" r="120" fill={`url(#${d})`} opacity=".9" />
-      {/* main cube */}
-      <path d="M110 180 200 128l90 52-90 52z" fill={`url(#${b})`} />
-      <path d="M110 180v104l90 52V232z" fill={`url(#${a})`} />
-      <path d="M290 180v104l-90 52V232z" fill={`url(#${c})`} />
-      {/* highlight edge */}
-      <path d="M110 180 200 128l90 52" fill="none" stroke="#fff" strokeOpacity=".8" strokeWidth="1.5" />
-      <path d="M200 232v104" fill="none" stroke="#fff" strokeOpacity=".35" strokeWidth="1" />
-    </svg>
-  )
-}
-
 /** Cluster of translucent crystal shards (mega-menu promo, segment cards). */
 export function Crystal({ accent = 'purple', className = '', style }) {
   const p = palettes[accent] || palettes.purple
@@ -65,23 +35,6 @@ export function Crystal({ accent = 'purple', className = '', style }) {
         <path d="M200 230l70-30 20 60-60 30z" fill={p[4]} opacity=".75" />
         <g fill="none" stroke="#fff" strokeOpacity=".7" strokeWidth="1"><path d="M150 20 230 120 150 170 70 120zM150 170v110M70 120v110l80 50 80-50V120" /></g>
       </g>
-    </svg>
-  )
-}
-
-/** Floating squircle "glass tile" with inner gem (statement section). */
-export function Tile({ accent = 'blue', size = 90, className = '', style }) {
-  const p = palettes[accent] || palettes.blue
-  const a = id('tl'), b = id('tg')
-  return (
-    <svg viewBox="0 0 100 100" width={size} height={size} className={`art tile ${className}`} style={style} aria-hidden="true">
-      <defs>
-        <linearGradient id={a} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor={p[4]} /><stop offset=".5" stopColor={p[3]} /><stop offset="1" stopColor={p[1]} /></linearGradient>
-        <linearGradient id={b} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#b6dc82" /><stop offset="1" stopColor="#7fbf2a" /></linearGradient>
-      </defs>
-      <rect x="6" y="6" width="88" height="88" rx="26" fill={`url(#${a})`} />
-      <rect x="6" y="6" width="88" height="88" rx="26" fill="none" stroke="#fff" strokeOpacity=".6" />
-      <path d="M50 24 76 50 50 76 24 50z" fill={`url(#${b})`} opacity=".95" />
     </svg>
   )
 }
@@ -220,13 +173,6 @@ export function SpotArt({ icon = 'spark', accent = 'blue', ai = true, className 
 /** Slowly drifting brand-colour gradient (Stripe-style) used behind heroes and the CTA band. */
 export function Mesh({ className = '' }) {
   return <div className={`mesh ${className}`} aria-hidden="true"><i className="m1" /><i className="m2" /><i className="m3" /><i className="m4" /><i className="m5" /></div>
-}
-
-/** Giant wordmark used as hero artwork (remote renders its logo huge in pale cyan). */
-export function Wordmark({ text = 'skaps', className = '' }) {
-  return (
-    <div className={`wordmark ${className}`} aria-hidden="true"><span>{text}</span></div>
-  )
 }
 
 /** Hub diagram: AI tools connected to the SKAPS core (for the AI page). */

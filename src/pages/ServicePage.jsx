@@ -3,7 +3,7 @@ import Icon from '../components/Icon'
 import { Mesh, SpotArt } from '../components/Art'
 import { usePolarity } from '../components/Layout'
 import { Arrow, DemoButton, CloseLine, SectionHead, MoreServices } from '../components/Sections'
-import { getService, stats, complianceBadges } from '../data/site'
+import { getService } from '../data/site'
 
 const featureAccents = ['blue', 'lime', 'cyan', 'purple']
 const featureIcons = ['target', 'people', 'shield', 'chart']
@@ -29,7 +29,7 @@ const statementFor = {
   'staffing-solutions': ['Scale your team, your way.', 'your way'],
   'interview-support': ['Better interviews, better hires.', 'better hires'],
   'hr-consulting': ['HR strategy that moves the business.', 'moves'],
-  'payroll-management-india': ['Payroll, one partner.', 'one partner'],
+  'payroll-management-india': ['Payroll that runs on time, every cycle.', 'on time'],
   'us-payroll-services': ['US payroll, handled end to end.', 'end to end'],
   'training-development': ['Skills that stay with your team.', 'stay'],
   'compliance-legal': ['Compliance by design, not by chance.', 'by design'],
@@ -51,7 +51,6 @@ export default function ServicePage() {
   if (!s) return <Navigate to="/services" replace />
   const [statement, word] = statementFor[s.slug] || ['Built for growing businesses.', 'growing']
   const includes = engagement.filter(([, overlap]) => !overlap || !s.points.some(p => overlap.test(p))).map(([label]) => label)
-  const badges = complianceBadges.filter(b => !s.points.some(p => p.toLowerCase().includes(b.toLowerCase().split(' ').slice(-2).join(' '))))
 
   return (
     <>
@@ -89,16 +88,7 @@ export default function ServicePage() {
 
       <section className="section" style={{ background: 'var(--grey-50)' }}>
         <div className="container">
-          <SectionHead title={partnerTitle(s)} copy="SKAPS combines deep local expertise with a structured, confidential process so your team can move quickly and confidently." />
-          <ul className="checklist inline reveal" style={{ marginBottom: 48 }}>{badges.map(b => <li key={b}><Icon name="check" />{b}</li>)}</ul>
-          <div className="stat-row reveal">{stats.slice(0, 4).map(([n, l]) => <div key={l}><strong className="t-stat">{n}</strong><p>{l}</p></div>)}</div>
-          <div className="t-center" style={{ marginTop: 40 }}><DemoButton className="btn btn-secondary" /></div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <SectionHead center={false} title={`What companies use ${s.title.replace(' (India)', '')} for`} copy="The situations where teams most often bring SKAPS in." />
+          <SectionHead center={false} title={`What companies use ${s.title.replace(' (India)', '')} for`} />
           <div className="usecase-grid">
             {s.uses.map(([t, d, icon]) => <div className="usecase reveal" key={t}><span className="ico-box"><Icon name={icon} /></span><p><b>{t}:</b> {d}</p></div>)}
             <div className="usecase reveal"><span className="ico-box"><Icon name="ai" /></span><p><b>{s.ai[0]}:</b> {s.ai[1]}</p></div>
@@ -109,11 +99,10 @@ export default function ServicePage() {
       <section className="section" style={{ background: 'var(--cyan-25)' }}>
         <div className="container pricing-teaser">
           <div>
-            <h2 className="t-h2 reveal">Transparent engagement, no hidden fees.</h2>
-            <p className="t-muted reveal" style={{ marginTop: 16, maxWidth: 440 }}>SKAPS scopes everything upfront, so the engagement you are quoted is the engagement you get. Choose the model that fits how your organization scales.</p>
+            <h2 className="t-h2 reveal">{partnerTitle(s)}</h2>
+            <p className="t-muted reveal" style={{ marginTop: 16, maxWidth: 440 }}>SKAPS scopes everything upfront, so the engagement you are quoted is the engagement you get. No hidden fees.</p>
           </div>
           <div className={`price-card ${s.accent === 'blue' || s.accent === 'cyan' ? 'blue' : 'lime'} reveal`}>
-            <h3 className="t-h3">{s.title}</h3>
             <div className="inner"><span className="t-small t-muted">Engagement</span><strong>Custom</strong><span className="t-small t-muted">scoped to your headcount and regions</span></div>
             <DemoButton className={s.accent === 'blue' || s.accent === 'cyan' ? 'btn btn-inverse' : 'btn'}>Get a quote</DemoButton>
           </div>

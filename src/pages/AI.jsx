@@ -7,9 +7,9 @@ import { aiPillars, aiStats } from '../data/site'
 
 // Dark "developer" theme page — mirrors remote.com/remote-mcp ("Build on Remote").
 const surfaces = [
-  ['01', 'Talent', 'for hiring faster', 'Connect AI to your hiring pipeline', 'SKAPS Intelligence matches and ranks candidates against role requirements, skills and culture signals. Shortlists arrive in days, and every profile is pre-qualified by a SKAPS consultant.', ['Rank candidates against role requirements', 'Surface passive talent from our networks', 'Draft job descriptions and interview plans']],
-  ['02', 'Payroll', 'for accurate pay runs', 'Catch anomalies before a cycle closes', 'Every payroll run is scanned for outliers in salaries, deductions, attendance and reimbursements. Exceptions are routed to your dedicated manager with a recommended fix.', ['Detect outliers in gross-to-net calculations', 'Flag duplicate or missing attendance records', 'Reconcile reimbursements and advances']],
-  ['03', 'Compliance', 'for peace of mind', 'Monitor statutory change, everywhere you operate', 'The compliance watchtower tracks labor-law, tax and statutory updates across India, the US and Australia and translates them into clear actions for your team.', ['Track filing deadlines and legislative updates', 'Answer compliance questions in minutes', 'Generate audit-ready documentation']],
+  ['01', 'Talent', 'for hiring faster', 'Connect AI to your hiring pipeline', 'Your open roles are matched against SKAPS talent networks, and a consultant pre-qualifies every profile on the shortlist.', ['Rank candidates against role requirements', 'Surface passive talent from our networks', 'Draft job descriptions and interview plans']],
+  ['02', 'Payroll', 'for accurate pay runs', 'Catch anomalies before a cycle closes', 'Exceptions are routed to your dedicated payroll manager with a recommended fix, so they are resolved before anyone is paid.', ['Detect outliers in gross-to-net calculations', 'Flag duplicate or missing attendance records', 'Reconcile reimbursements and advances']],
+  ['03', 'Compliance', 'for peace of mind', 'Monitor statutory change, everywhere you operate', 'New notifications become clear actions for your team, each with an owner and a deadline.', ['Track filing deadlines and legislative updates', 'Answer compliance questions in minutes', 'Generate audit-ready documentation']],
 ]
 
 export default function AI() {
@@ -25,7 +25,7 @@ export default function AI() {
             <div className="terminal-bar"><span><span className="dot" />[ LIVE ] [ SKAPS INTELLIGENCE ]</span><span>○ ○ ○</span></div>
             <div className="terminal-body">
               <div style={{ display: 'grid', gap: 20 }}>
-                <p>Whether you are hiring your first team in India, running payroll across three countries or keeping up with changing labor law, SKAPS gives you the right intelligence for the job. Use <b>Talent</b> for faster shortlists, <b>Payroll</b> for anomaly-free pay runs, and <b>Compliance</b> to stay ahead of statutory change — all reviewed by SKAPS experts.</p>
+                <p>Whether you are hiring your first team in India, running payroll across three countries or keeping up with changing labor law, SKAPS gives you the right intelligence for the job. Use <b>Talent</b> for faster shortlists, <b>Payroll</b> for anomaly-free pay runs, and <b>Compliance</b> to stay ahead of statutory change.</p>
                 <div className="actions"><button type="button" className="btn btn-dev" onClick={openDemo}>▣ get started</button><Link className="btn btn-dev-ghost" to="/about#ai">read our story ↗</Link></div>
               </div>
               <HubDiagram />
@@ -50,7 +50,7 @@ export default function AI() {
             ))}
           </div>
           <h2 className="t-display t-center" style={{ fontWeight: 400, marginTop: 96 }}>Better <span style={{ color: 'var(--dev-cyan)', fontStyle: 'italic' }}>together</span></h2>
-          <p className="t-center t-muted measure" style={{ margin: '20px auto 0' }}>Talent, Payroll and Compliance intelligence are designed to work together. Most SKAPS clients use all three — and every recommendation is reviewed by an experienced consultant before it reaches you.</p>
+          <p className="t-center t-muted measure" style={{ margin: '20px auto 0' }}>Talent, Payroll and Compliance intelligence are designed to work together. Most SKAPS clients use all three.</p>
         </div>
       </section>
 
@@ -69,7 +69,7 @@ export default function AI() {
         <div className="container dev-two wide" style={{ gap: 48 }}>
           <h2 className="t-h2" style={{ fontWeight: 400, letterSpacing: '-.03em' }}>Using AI at SKAPS is as <span style={{ color: 'var(--dev-cyan)', fontStyle: 'italic' }}>secure</span> as working with us has always been.</h2>
           <div className="secure-grid">
-            {[['confidentiality', 'Strict employee-data confidentiality', 'Your employee and payroll data is used only to deliver your engagement — never to train third-party AI models.'], ['human review', 'Human-in-the-loop by default', 'Every AI recommendation — a shortlist, a flagged payslip, a compliance alert — is validated by a SKAPS specialist.'], ['governed access', 'Governed, role-based access', 'Employees see their own records; your admins see your organization. Nothing more.'], ['audit-ready', 'Audit-ready by design', 'Every automated action is logged with clear documentation, so audits and reviews are straightforward.']].map(([l, t, d]) => <div className="secure-card reveal" key={t}><span className="label">{l}</span><strong>{t}</strong><p>{d}</p></div>)}
+            {[['confidentiality', 'Strict employee-data confidentiality', 'Your employee and payroll data is used only to deliver your engagement — never to train third-party AI models.'], ['governed access', 'Governed, role-based access', 'Employees see their own records; your admins see your organization. Nothing more.'], ['audit-ready', 'Audit-ready by design', 'Every automated action is logged with clear documentation, so audits and reviews are straightforward.']].map(([l, t, d]) => <div className="secure-card reveal" key={t}><span className="label">{l}</span><strong>{t}</strong><p>{d}</p></div>)}
           </div>
         </div>
       </section>
@@ -78,7 +78,7 @@ export default function AI() {
         <div className="container t-center" style={{ display: 'grid', gap: 20, justifyItems: 'center' }}>
           <h2 className="t-h2" style={{ fontWeight: 400 }}>Ready to connect? It takes one conversation.</h2>
           <p className="t-muted">Schedule a consultation and see how SKAPS Intelligence fits your hiring, payroll and compliance.</p>
-          <div className="actions"><button type="button" className="btn btn-dev" onClick={openDemo}>▣ get started</button><Link className="btn btn-dev-ghost" to="/services">see all services ↗</Link></div>
+          <div className="actions"><button type="button" className="btn btn-dev" onClick={openDemo}>▣ get started</button><Link className="btn btn-dev-ghost" to="/services/ai-analytics-talent">hire ai talent ↗</Link><Link className="btn btn-dev-ghost" to="/services">see all services ↗</Link></div>
         </div>
       </section>
     </div>

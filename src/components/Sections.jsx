@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Icon from './Icon'
 import { Mesh, SpotArt } from './Art'
 import { useUI } from './Layout'
-import { clientLogos, testimonials, faqs, services, steps, statYears, statSeries } from '../data/site'
+import { clientLogos, faqs, services, stats, statYears, statSeries } from '../data/site'
 
 export const Arrow = (props) => <Icon name="arrow" className="arrow" style={{ width: 16, height: 16 }} {...props} />
 
@@ -99,7 +99,7 @@ function BarChart({ values }) {
     <div className="bars" aria-hidden="true">
       {values.map((v, i) => (
         <div key={statYears[i]} className={`bar${i === values.length - 1 ? ' last' : ''}`} style={{ '--h': `${(v / max) * 100}%`, '--i': i }}>
-          {i === values.length - 1 && <b>{v}+</b>}<i /><span>{`'${statYears[i].slice(2)}`}</span>
+          <i /><span>{`'${statYears[i].slice(2)}`}</span>
         </div>
       ))}
     </div>
@@ -158,19 +158,19 @@ function StatsShowcase() {
   return (
     <>
     <div className="stat-grid" ref={grid} onScroll={onScroll}>
-      <StatCard className="span-3" label="Clients supported" to={50} format={n => `${Math.round(n)}+`} delta={`${growthPct(clients)}% YoY`} caption="Organizations across technology, semiconductors, finance and services.">
+      <StatCard className="span-3" label={stats[0][1]} to={50} format={n => `${Math.round(n)}+`} delta={`${growthPct(clients)}% YoY`}>
         <BarChart values={clients} />
       </StatCard>
-      <StatCard className="span-3" label="Workforce managed" to={1000} format={k} delta={`${Math.round(workforce.at(-1) / workforce[0])}x since 2020`} caption="People on SKAPS-run payroll, contracts and dedicated teams.">
+      <StatCard className="span-3" label={stats[1][1]} to={1000} format={k} delta={`${Math.round(workforce.at(-1) / workforce[0])}x since 2020`} caption="People on SKAPS-run payroll, contracts and dedicated teams.">
         <AreaChart values={workforce} />
       </StatCard>
-      <StatCard className="span-2" label="Successful placements" to={1500} format={n => `${Math.round(n).toLocaleString('en-IN')}+`} delta={`${growthPct(placements)}% YoY`} caption="Each dot is 10 people placed. Green dots: placed this year.">
+      <StatCard className="span-2" label={stats[2][1]} to={1500} format={n => `${Math.round(n).toLocaleString('en-IN')}+`} delta={`${growthPct(placements)}% YoY`} caption="Each dot is 10 people placed. Green dots: placed this year.">
         <DotGrid total={1500} per={10} />
       </StatCard>
-      <StatCard className="span-2" label="Payroll processed" to={25} format={n => `₹${Math.round(n)} Cr+`} delta={`${Math.round(payrollCr.at(-1) / payrollCr[0])}x since 2020`}>
+      <StatCard className="span-2" label={stats[3][1]} to={25} format={n => `₹${Math.round(n)} Cr+`} delta={`${Math.round(payrollCr.at(-1) / payrollCr[0])}x since 2020`}>
         <HBars values={payrollCr} />
       </StatCard>
-      <StatCard className="span-2 donut-card" label="Compliance accuracy" to={99.9} format={n => `${n.toFixed(1)}%`} caption="Filings accurate and on time, across every engagement.">
+      <StatCard className="span-2 donut-card" label={stats[4][1]} to={99.9} format={n => `${n.toFixed(1)}%`} caption="Filings accurate and on time, across every engagement.">
         <Donut pct={99.9} />
       </StatCard>
     </div>
@@ -201,34 +201,10 @@ export function CloseLine({ children = 'Tell us what you need to hire, pay or st
   )
 }
 
-export function Testimonials({ title = 'Teams that trust SKAPS with their people.' }) {
-  const [idx, setIdx] = useState(0)
-  const [q, n, r, m, ml] = testimonials[idx]
-  const [role, org] = r.split(', ')
-  return (
-    <section className="section testimonials">
-      <div className="container">
-        <SectionHead center={false} title={title} cta={<Link className="btn btn-secondary" to="/clients">All client stories <Arrow /></Link>} />
-        <div className="reveal">
-          <figure className="feature-quote" key={n}>
-            <div>
-              <blockquote>“{q}”</blockquote>
-              <figcaption className="who"><span className="avatar-initials" aria-hidden="true">{n.split(' ').map(w => w[0]).join('')}</span><span>{n}<small>{role} · {org}</small></span></figcaption>
-            </div>
-            <div className="metric"><strong>{m}</strong><span>{ml}</span></div>
-          </figure>
-          <div className="quote-tabs" role="tablist" aria-label="Client stories">
-            {testimonials.map(([, name, rr], i) => <button key={name} type="button" role="tab" aria-selected={i === idx} onClick={() => setIdx(i)}>{rr.split(', ')[1]}</button>)}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 export function FAQ({ items = faqs, title = 'Frequently asked questions', eyebrow, limit }) {
   const [open, setOpen] = useState(0)
   const list = limit ? items.slice(0, limit) : items
+  const full = items === faqs && !limit
   const { openDemo } = useUI()
   return (
     <section className="section faq-section" id="faq">
@@ -236,7 +212,11 @@ export function FAQ({ items = faqs, title = 'Frequently asked questions', eyebro
         <div>
           {eyebrow && <span className="eyebrow muted">{eyebrow}</span>}
           <h2 className="t-h2 reveal" style={{ maxWidth: 360 }}>{title}</h2>
-          <p className="t-muted reveal" style={{ marginTop: 16, maxWidth: 340 }}>Still have questions? <button type="button" className="link" onClick={openDemo}>Chat with our experts <Arrow style={{ width: 14, height: 14 }} /></button></p>
+          <p className="t-muted reveal" style={{ marginTop: 16, maxWidth: 340 }}>
+            {full
+              ? <>Still have questions? <button type="button" className="link" onClick={openDemo}>Chat with our experts <Arrow style={{ width: 14, height: 14 }} /></button></>
+              : <>More questions? <Link className="link" to="/faq">See all FAQs <Arrow style={{ width: 14, height: 14 }} /></Link></>}
+          </p>
         </div>
         <div className="faq reveal">
           {list.map(([q, a], i) => (
@@ -269,8 +249,12 @@ export function CTABand({ title = <>Build a <b>Stronger Workforce</b> with Exper
   )
 }
 
-export function MoreServices({ exclude, title = 'More ways to strengthen your workforce.' }) {
-  const list = services.filter(s => s.slug !== exclude).slice(0, 3)
+// Same-group services first, starting after the current one, so each service page suggests different neighbours.
+export function MoreServices({ exclude, title = 'Related services.' }) {
+  const i = services.findIndex(s => s.slug === exclude)
+  const group = services[i]?.group
+  const ring = [...services.slice(i + 1), ...services.slice(0, Math.max(i, 0))]
+  const list = [...ring.filter(s => s.group === group), ...ring.filter(s => s.group !== group)].slice(0, 3)
   return (
     <section className="section">
       <div className="container">
@@ -287,20 +271,6 @@ export function MoreServices({ exclude, title = 'More ways to strengthen your wo
         </div>
       </div>
     </section>
-  )
-}
-
-export function Steps({ compact = false }) {
-  return (
-    <div className={`steps${compact ? ' compact' : ''}`}>
-      {steps.map(([n, t, d]) => (
-        <article className="step-card reveal" key={n}>
-          <b className="step-num">{n}</b>
-          <h3 className="t-h3">{t}</h3>
-          <p className="t-small t-muted">{d}</p>
-        </article>
-      ))}
-    </div>
   )
 }
 

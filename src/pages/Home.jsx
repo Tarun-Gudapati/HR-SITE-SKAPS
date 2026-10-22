@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Mesh, NeedArt, needAccents } from '../components/Art'
+import { Mesh, NeedArt, SpotArt, needAccents } from '../components/Art'
 import { usePolarity } from '../components/Layout'
 import { Arrow, DemoButton, LogoMarquee, StatsStair, FAQ, CTABand, SectionHead } from '../components/Sections'
 import AIWorkflow from '../components/AIWorkflow'
-import { needs, testimonials } from '../data/site'
+import { needs, testimonials, services, homeServices, getService } from '../data/site'
 
 const heroRoles = ['Software Engineer', 'Data Scientist', 'Finance Controller', 'HR Business Partner', 'Sales Team', 'Support Team']
 
@@ -34,26 +34,33 @@ function Hero() {
         <p className="t-body-lg">AI-assisted hiring, payroll and compliance, with one accountable partner from your first hire to your hundredth.</p>
         <div className="actions">
           <DemoButton>Schedule a consultation</DemoButton>
-          <button type="button" className="btn btn-secondary" onClick={() => document.getElementById('models')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>See engagement models</button>
+          <button type="button" className="btn btn-secondary" onClick={() => document.getElementById('models')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>See what we do</button>
         </div>
       </div>
     </section>
   )
 }
 
+// Keep the card count a multiple of four so the 4- and 2-column grids stay even.
+const modelCards = [
+  ...homeServices.map(getService).map(s => ({ key: s.slug, title: s.title, text: s.summary, to: `/services/${s.slug}`, art: <SpotArt icon={s.icon} accent={s.accent} /> })),
+  ...needs.map(([t, d, , slug], i) => ({ key: slug, title: t, text: d, to: `/solutions#${slug}`, art: <NeedArt kind={slug} accent={needAccents[i]} /> })),
+  { key: 'all', title: `All ${services.length} services`, text: 'Payroll, compliance, training, HR technology, COE setup and more.', to: '/services', cta: 'Browse services', art: <SpotArt icon="layers" accent="cyan" ai={false} /> },
+]
+
 function Models() {
   return (
     <section className="section" id="models">
       <div className="container">
-        <SectionHead center={false} eyebrow="What we do" title="Four ways to build and pay your workforce." copy="Pick the engagement that fits how you scale. SKAPS runs the hiring, the payroll and the compliance." />
+        <SectionHead center={false} eyebrow="What we do" title="Advice, talent and payroll, from one partner." copy="Start with HR consulting or executive search, tap our ready pool of AI talent, or pick the engagement that fits how you scale. SKAPS runs the hiring, the payroll and the compliance." />
         <div className="model-grid">
-          {needs.map(([t, d, , slug], i) => (
-            <article className="model reveal" key={slug}>
-              <div className="model-art"><NeedArt kind={slug} accent={needAccents[i]} /></div>
-              <div>
-                <h3>{t}</h3>
-                <p>{d}</p>
-                <Link className="card-link" to="/solutions">Learn more <Arrow style={{ width: 14, height: 14 }} /></Link>
+          {modelCards.map(c => (
+            <article className="model reveal" key={c.key}>
+              <div className="model-art">{c.art}</div>
+              <div className="model-body">
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+                <Link className="card-link" to={c.to}>{c.cta || 'Learn more'} <Arrow style={{ width: 14, height: 14 }} /></Link>
               </div>
             </article>
           ))}

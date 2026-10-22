@@ -3,22 +3,22 @@ import Icon from '../components/Icon'
 import { Crystal, Iso } from '../components/Art'
 import LeadForm from '../components/LeadForm'
 import { usePolarity } from '../components/Layout'
-import { Arrow, PageHero, CloseLine, FAQ, SectionHead, Steps, DemoButton, StatsStair } from '../components/Sections'
-import { complianceItems, complianceBadges, testimonials, clientLogos, faqs, PHONE, PHONE_TEL, EMAIL, ADDRESS, steps } from '../data/site'
+import { Arrow, PageHero, CloseLine, FAQ, SectionHead, DemoButton } from '../components/Sections'
+import { complianceItems, complianceBadges, testimonials, clientLogos, faqs, stats, PHONES, EMAIL, ADDRESS, steps } from '../data/site'
 
 export function HowItWorks() {
   usePolarity('default')
   return (
     <>
-      <PageHero theme="blue" eyebrow="How it works" title="A Structured Approach to Workforce Management." copy="A focused process keeps every engagement transparent, efficient and aligned." points={steps.slice(0, 3).map(s => s[1])} />
-      <section className="section"><div className="container"><SectionHead title="Five steps from first conversation to ongoing support." /><Steps /></div></section>
+      <PageHero center eyebrow="How it works" title="A Structured Approach to Workforce Management." copy="A focused process keeps every engagement transparent, efficient and aligned." />
       <section className="section" style={{ background: 'var(--grey-50)' }}>
         <div className="container">
+          <SectionHead title="Five steps from first conversation to ongoing support." />
           <div className="grid grid-2">
-            {steps.map(([n, t, d], i) => (
+            {steps.map(([n, t, d]) => (
               <article className="card reveal" key={n} style={{ display: 'grid', gridTemplateColumns: '72px 1fr', gap: 20, alignItems: 'start' }}>
                 <b className="step-num" style={{ fontSize: 44, color: 'var(--purple-600)', letterSpacing: '-.03em', lineHeight: 1 }}>{n}</b>
-                <div style={{ display: 'grid', gap: 8 }}><h3 className="t-h3">{t}</h3><p className="t-small t-muted">{d}</p><p className="t-small t-muted">{['We map goals, gaps and priorities with your leadership and HR teams, and agree on an engagement model.', 'Our networks and SKAPS Intelligence shortlist role-ready candidates; our consultants pre-qualify every profile.', 'Offer letters, statutory forms and policy acknowledgements are generated, routed and tracked for you.', 'ISO-certified payroll runs with anomaly checks, filings and audit-ready documentation in each region.', 'A dedicated personal manager reviews metrics with you and keeps improving the engagement.'][i]}</p></div>
+                <div style={{ display: 'grid', gap: 8 }}><h3 className="t-h3">{t}</h3><p className="t-small t-muted">{d}</p></div>
               </article>
             ))}
           </div>
@@ -33,19 +33,17 @@ export function Compliance() {
   usePolarity('default')
   return (
     <>
-      <PageHero theme="lime" eyebrow="Built on confidence" title="Reliable Compliance for a Secure Workforce." copy="Managing workforce compliance is essential for protecting both organizations and employees. SKAPS HR Solutions ensures that all workforce operations follow the latest labor regulations and statutory requirements. Our dedicated compliance expertise helps businesses operate confidently while reducing legal risks and administrative complexity." points={complianceItems.slice(0, 3)}>
+      <PageHero eyebrow="Built on confidence" title="Reliable Compliance for a Secure Workforce." copy="Managing workforce compliance is essential for protecting both organizations and employees. SKAPS HR Solutions ensures that all workforce operations follow the latest labor regulations and statutory requirements. Our dedicated compliance expertise helps businesses operate confidently while reducing legal risks and administrative complexity." points={complianceItems}>
         <DemoButton>Talk to a specialist</DemoButton>
       </PageHero>
       <section className="section">
         <div className="container">
-          <SectionHead center={false} title="Everything compliance covers at SKAPS." />
-          <div className="grid grid-4">{complianceItems.map(i => <div className="card reveal" key={i} style={{ display: 'grid', gap: 12 }}><span className="ico-box" style={{ background: 'var(--lime-200)' }}><Icon name="check" /></span><h3 className="t-h3">{i}</h3></div>)}</div>
-          <div className="usecase-grid" style={{ marginTop: 48 }}>
+          <SectionHead center={false} title="Everything compliance covers at SKAPS." cta={<Link className="card-link" to="/services/compliance-legal">Compliance & Legal service <Arrow style={{ width: 14, height: 14 }} /></Link>} />
+          <div className="usecase-grid">
             {['Comprehensive compliance audit', 'Detailed strengths-and-gaps report', 'Clear and actionable improvement plan', 'Ongoing monthly compliance management', 'Proactive support and legislative updates', 'Compliance watchtower powered by SKAPS Intelligence'].map((p, i) => <div className="usecase reveal" key={p}><span className="ico-box"><Icon name={['shield', 'doc', 'chart', 'clock', 'alert', 'ai'][i]} /></span><p>{p}</p></div>)}
           </div>
         </div>
       </section>
-      <StatsStair />
       <CloseLine>Need a compliance review?</CloseLine>
     </>
   )
@@ -55,7 +53,7 @@ export function Clients() {
   usePolarity('default')
   return (
     <>
-      <PageHero theme="purple" eyebrow="Testimonials" title="What Our Clients Say." copy="Trusted By Organizations Managing Modern And Distributed Workforces Across Multiple Industries." points={['50+ clients supported', '1K+ workforce managed', '1500+ successful placements']} art="crystal" />
+      <PageHero eyebrow="Testimonials" title="What Our Clients Say." copy="Trusted By Organizations Managing Modern And Distributed Workforces Across Multiple Industries." points={stats.slice(0, 3).map(([n, l]) => `${n} ${l.toLowerCase()}`)} />
       <section className="section" id="logos">
         <div className="container">
           <SectionHead center={false} title="Organizations we support." />
@@ -86,9 +84,8 @@ export function FAQPage() {
   usePolarity('default')
   return (
     <>
-      <PageHero theme="cyan" center eyebrow="FAQ" title="Common Questions About Our HR Services." copy="Everything you need to know about SKAPS services, engagement models and compliance." />
+      <PageHero center eyebrow="FAQ" title="Common Questions About Our HR Services." copy="Everything you need to know about SKAPS services, engagement models and compliance." />
       <FAQ items={faqs} title="Questions we actually get asked." />
-      <CloseLine>Still have a question?</CloseLine>
     </>
   )
 }
@@ -119,7 +116,7 @@ export function Contact() {
             <h2 className="t-h3" style={{ fontSize: 22 }}>Reach us directly</h2>
             <strong>We’ve got you covered. Anytime, anywhere.</strong>
             <div className="details" style={{ textAlign: 'left', marginTop: 8 }}>
-              <a href={`tel:${PHONE_TEL}`}><Icon name="phone" /><span><small>Phone</small>{PHONE}</span></a>
+              {PHONES.map(p => <a key={p.tel} href={`tel:${p.tel}`}><Icon name="phone" /><span><small>{p.label} phone</small>{p.display}</span></a>)}
               <a href={`mailto:${EMAIL}`}><Icon name="mail" /><span><small>Email</small>{EMAIL}</span></a>
               <div><Icon name="pin" /><span><small>Office location</small>{ADDRESS}</span></div>
             </div>

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import Icon from './Icon'
 import { Brand } from './Header'
-import { services, needs, industries, socials, footerIntro, PHONE, PHONE_TEL, EMAIL, ADDRESS, BRAND_FULL } from '../data/site'
+import { services, needs, industries, industryLink, socials, footerIntro, PHONES, EMAIL, ADDRESS, BRAND_FULL } from '../data/site'
 
 const liveSocials = socials.filter(([, , href]) => href && href !== '#')
 
@@ -27,7 +27,7 @@ export default function Footer({ footnote }) {
             </div>
             <div className="footer-col">
               <h4>Industries</h4>
-              <ul>{industries.slice(0, 7).map(([t, , slug]) => <li key={slug}><Link to={`/industries#${slug}`}>{t}</Link></li>)}<li><Link to="/industries">All industries</Link></li></ul>
+              <ul>{industries.slice(0, 7).map(i => <li key={i[2]}><Link to={industryLink(i)}>{i[0]}</Link></li>)}<li><Link to="/industries">All industries</Link></li></ul>
             </div>
             <div className="footer-col">
               <h4>Company</h4>
@@ -36,7 +36,7 @@ export default function Footer({ footnote }) {
               </ul>
               <h4 style={{ marginTop: 24 }}>Contact</h4>
               <ul className="footer-contact">
-                <li><Icon name="phone" /><a href={`tel:${PHONE_TEL}`}>{PHONE}</a></li>
+                {PHONES.map((p, i) => <li key={p.tel}><Icon name="phone" /><span><a href={`tel:${p.tel}`}>{p.display}</a>{i > 0 && ` (${p.label.toLowerCase()})`}</span></li>)}
                 <li><Icon name="mail" /><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
                 <li><Icon name="pin" /><span>{ADDRESS}</span></li>
               </ul>
@@ -44,7 +44,7 @@ export default function Footer({ footnote }) {
           </div>
           <div className="footer-bottom">
             <span>© {new Date().getFullYear()} SKAPS HR Solutions. All rights reserved.</span>
-            <div className="links"><Link to="/compliance">Compliance</Link><Link to="/faq">FAQ</Link><Link to="/contact">Contact</Link><span>India · United States · Australia</span></div>
+            <span>India · United States · Australia</span>
           </div>
         </div>
       </div>
