@@ -5,6 +5,8 @@ import { AIChip, Arrow, CTABand, DemoButton, FAQ, PageHero, SectionHead } from '
 import { aiTalent } from '../data/site'
 
 const { roles, stack, models, vetting, matching, faqs } = aiTalent
+const roleAccents = ['is-blue', 'is-green', 'is-cyan']
+const modelAccents = ['is-navy', 'is-blue', 'is-green', 'is-teal']
 
 // Illustrative rows for the hero "sample shortlist" card: [role, stack, status, status style]
 const sample = [
@@ -42,16 +44,17 @@ export default function AITalent() {
         <button type="button" className="btn btn-secondary" onClick={() => document.getElementById('roles')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>See the roles</button>
       </PageHero>
 
-      <section className="section" id="roles">
+      <section className="section ait-roles" id="roles">
         <div className="container">
           <SectionHead center={false} eyebrow="Roles we place" title="Every role an AI team needs, from first model to production." cta={<p className="t-small t-muted ait-lead">Hiring a Head of AI or Data? <Link className="link" to="/services/executive-search">Executive search <Arrow style={{ width: 14, height: 14 }} /></Link></p>} />
-          <div className="uc-grid">
-            {roles.map(([t, d, icon], i) => (
-              <button type="button" className={`uc-card ait-role reveal ${i % 2 ? 'is-green' : 'is-blue'}`} key={t} onClick={openDemo}>
-                <span className="uc-ico"><Icon name={icon} /></span>
-                <h3 className="uc-title">{t}</h3>
-                <p className="uc-desc">{d}</p>
-                <span className="uc-more" aria-hidden="true">Request profiles <Arrow style={{ width: 14, height: 14 }} /></span>
+          <div className="ait-role-grid">
+            {roles.map(([t, d, icon, tags], i) => (
+              <button type="button" className={`ait-role reveal ${roleAccents[(i + Math.floor(i / 3)) % 3]}`} key={t} onClick={openDemo}>
+                <span className="ait-role-top"><span className="ait-role-ico"><Icon name={icon} /></span><span className="ait-role-num">{String(i + 1).padStart(2, '0')}</span></span>
+                <h3 className="ait-role-title">{t}</h3>
+                <p className="ait-role-desc">{d}</p>
+                <span className="ait-role-tags">{tags.map(s => <span key={s}>{s}</span>)}</span>
+                <span className="ait-role-more" aria-hidden="true">Request profiles <Arrow style={{ width: 16, height: 16 }} /></span>
               </button>
             ))}
           </div>
@@ -61,11 +64,11 @@ export default function AITalent() {
       <section className="section" style={{ background: 'var(--grey-50)' }}>
         <div className="container">
           <SectionHead center={false} eyebrow="Skills & stack" title="Fluent in the tools your team already uses." copy="Candidates are assessed on the frameworks and platforms in your stack, not on keywords in a résumé." />
-          <div className="grid grid-2">
-            {stack.map(([g, skills]) => (
-              <article className="card reveal" key={g}>
-                <span className="eyebrow muted">{g}</span>
-                <ul className="ait-chips">{skills.map(s => <li className="tag" key={s}>{s}</li>)}</ul>
+          <div className="ait-stack">
+            {stack.map(([g, skills, icon], i) => (
+              <article className={`ait-stack-card reveal ${(i + Math.floor(i / 2)) % 2 ? 'is-green' : ''}`} key={g}>
+                <div className="ait-stack-head"><span className="ait-stack-ico"><Icon name={icon} /></span><h3>{g}</h3><span className="ait-stack-count">{skills.length} skills</span></div>
+                <ul className="ait-chips">{skills.map(s => <li key={s}>{s}</li>)}</ul>
               </article>
             ))}
           </div>
@@ -75,14 +78,15 @@ export default function AITalent() {
       <section className="section">
         <div className="container">
           <SectionHead center={false} eyebrow="Engagement models" title="Choose how you engage AI talent." copy="Start with one engineer or a full team, and change the model as you grow." />
-          <div className="grid grid-4">
+          <div className="ait-models">
             {models.map(([t, d, icon, to, label], i) => (
-              <article className="card reveal ait-model" key={t}>
-                <span className="eyebrow muted">{String(i + 1).padStart(2, '0')}</span>
-                <span className="ico-box"><Icon name={icon} /></span>
-                <h3 className="t-h3">{t}</h3>
-                <p className="t-small t-muted">{d}</p>
-                <Link className="card-link" to={to}>{label} <Arrow style={{ width: 14, height: 14 }} /></Link>
+              <article className={`ait-model reveal ${modelAccents[i % modelAccents.length]}`} key={t}>
+                <div className="ait-model-band"><span className="ait-model-ico"><Icon name={icon} /></span><b aria-hidden="true">{String(i + 1).padStart(2, '0')}</b></div>
+                <div className="ait-model-body">
+                  <h3 className="t-h3">{t}</h3>
+                  <p className="t-small t-muted">{d}</p>
+                  <Link className="card-link" to={to}>{label} <Arrow style={{ width: 14, height: 14 }} /></Link>
+                </div>
               </article>
             ))}
           </div>
@@ -92,15 +96,17 @@ export default function AITalent() {
       <section className="section" style={{ background: 'var(--cyan-25)' }}>
         <div className="container">
           <SectionHead center={false} eyebrow="How vetting works" title="Assessed by practitioners, not just screened." copy="Every profile you see has passed a technical assessment and a review of real project work." />
-          <div className="steps">
+          <ol className="ait-steps">
             {vetting.map(([n, t, d]) => (
-              <article className="step-card reveal" key={n}>
-                <b className="step-num">{n}</b>
-                <h3 className="t-h3">{t}</h3>
-                <p className="t-small t-muted">{d}</p>
-              </article>
+              <li className="ait-step reveal" key={n}>
+                <span className="ait-step-dot">{n}</span>
+                <div className="ait-step-card">
+                  <h3>{t}</h3>
+                  <p className="t-small t-muted">{d}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ol>
           <p className="t-small t-muted ait-lead" style={{ marginTop: 24 }}>Want to run the interviews with us? <Link className="link" to="/services/interview-support">Interview support <Arrow style={{ width: 14, height: 14 }} /></Link></p>
         </div>
       </section>

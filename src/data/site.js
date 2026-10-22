@@ -28,7 +28,7 @@ export const PHONE = PHONES[0].display
 export const PHONE_TEL = PHONES[0].tel
 export const EMAIL = 'info@skaps.co.in'
 export const ADDRESS = 'First Floor, ARD Magnum, Door No: 12-7-134/MH/2 in Sy. No: 1011/10(P), Anjaneya Nagar, Green Hills Road, Phase 4, Near Moosa Peta, Hyderabad – 500018'
-export const REGIONS = ['United States', 'India (Headquarters)', 'Australia']
+export const REGIONS = ['United States', 'India (Headquarters)', 'United Kingdom', 'Australia']
 export const YEARS = '10+'
 
 // Announcement bar above the header on every page: [bold label, message]
@@ -58,7 +58,7 @@ export const advantages = [
   ['Dedicated Personal Manager', 'One accountable point of contact for payroll, staffing and compliance questions.'],
   ['Transparent, Predictable Pricing', 'Clear engagement models with no hidden fees, so the number you are quoted is the number you pay.'],
   ['Secure Employee Self-Service', 'Secure ERP access to payslips, leave information and documents for every employee.'],
-  ['One Partner Across Regions', 'Consistent payroll, compliance and operations across India, the United States and Australia.'],
+  ['One Partner Across Regions', 'Consistent payroll, compliance and operations across India, the United States, the United Kingdom and Australia.'],
 ]
 
 export const services = [
@@ -394,7 +394,7 @@ export const storyAI = [
 export const aiPillars = [
   ['AI Talent Matching', 'Candidates are matched and ranked against role requirements, skills and culture signals.', 'target'],
   ['Payroll Anomaly Detection', 'Every payroll run is scanned for outliers in salaries, deductions and attendance before it is finalized.', 'doc'],
-  ['Compliance Watchtower', 'Statutory, tax and labor-law updates across India, the US and Australia are tracked and translated into actions.', 'shield'],
+  ['Compliance Watchtower', 'Statutory, tax and labor-law updates across India, the US, the UK and Australia are tracked and translated into actions.', 'shield'],
   ['Workforce Analytics', 'Headcount, cost, attrition and hiring-funnel insights delivered as clear, decision-ready reports.', 'chart'],
   ['Automated Onboarding & Documents', 'Offer letters, statutory forms and policy acknowledgements generated, routed and tracked automatically.', 'spark'],
   ['Human-in-the-Loop Review', 'Every AI recommendation is validated by a SKAPS specialist before it reaches your team.', 'people'],
@@ -418,24 +418,24 @@ export const footerIntro = 'SKAPS HR Solutions is an AI-powered workforce manage
 // AI & Analytics Talent page (/services/ai-analytics-talent).
 // TODO(Skaps): wording is qualitative on purpose; add talent-pool size or placement figures only once confirmed.
 export const aiTalent = {
-  // [role, what they do, icon]
+  // [role, what they do, icon, key skills]
   roles: [
-    ['AI / ML Engineers', 'Build, train and ship machine-learning models into production products.', 'ai'],
-    ['GenAI & LLM Engineers', 'RAG pipelines, agents, fine-tuning and evaluation on modern large language models.', 'spark'],
-    ['MLOps Engineers', 'Model deployment, monitoring and CI/CD for ML on Kubernetes and cloud ML platforms.', 'cloud'],
-    ['Data Scientists', 'Experimentation, forecasting and statistical modelling that answers real business questions.', 'chart'],
-    ['Data Engineers', 'Pipelines, lakehouses and streaming that keep data reliable and ready for AI.', 'layers'],
-    ['Computer Vision & NLP Specialists', 'Image, video, speech and language models for domain-specific problems.', 'eye'],
-    ['Analytics & BI Engineers', 'Semantic layers, dashboards and self-serve reporting that leaders actually use.', 'target'],
-    ['AI Product Managers', 'Product leaders who scope AI features, define evaluation and ship them to users.', 'briefcase'],
-    ['AI Research Scientists', 'Applied researchers for novel models, benchmarking and proof-of-concept work.', 'book'],
+    ['AI / ML Engineers', 'Build, train and ship machine-learning models into production products.', 'ai', ['PyTorch', 'scikit-learn', 'Model serving']],
+    ['GenAI & LLM Engineers', 'RAG pipelines, agents, fine-tuning and evaluation on modern large language models.', 'spark', ['RAG', 'Agents', 'LoRA']],
+    ['MLOps Engineers', 'Model deployment, monitoring and CI/CD for ML on Kubernetes and cloud ML platforms.', 'cloud', ['Kubernetes', 'MLflow', 'CI/CD']],
+    ['Data Scientists', 'Experimentation, forecasting and statistical modelling that answers real business questions.', 'chart', ['Forecasting', 'A/B testing', 'Python']],
+    ['Data Engineers', 'Pipelines, lakehouses and streaming that keep data reliable and ready for AI.', 'layers', ['Spark', 'Databricks', 'Kafka']],
+    ['Computer Vision & NLP Specialists', 'Image, video, speech and language models for domain-specific problems.', 'eye', ['OpenCV', 'Transformers', 'spaCy']],
+    ['Analytics & BI Engineers', 'Semantic layers, dashboards and self-serve reporting that leaders actually use.', 'target', ['dbt', 'Power BI', 'Looker']],
+    ['AI Product Managers', 'Product leaders who scope AI features, define evaluation and ship them to users.', 'briefcase', ['AI roadmaps', 'Evaluation', 'Discovery']],
+    ['AI Research Scientists', 'Applied researchers for novel models, benchmarking and proof-of-concept work.', 'book', ['Benchmarks', 'Papers', 'Prototypes']],
   ],
-  // [group, skills]
+  // [group, skills, icon]
   stack: [
-    ['Languages & ML frameworks', ['Python', 'SQL', 'R', 'Scala', 'PyTorch', 'TensorFlow', 'JAX', 'scikit-learn', 'XGBoost', 'Hugging Face', 'OpenCV', 'spaCy']],
-    ['GenAI & LLMs', ['LangChain', 'LlamaIndex', 'OpenAI & Anthropic APIs', 'Azure OpenAI', 'RAG', 'Vector databases', 'Fine-tuning (LoRA)', 'LLM evaluation', 'Prompt engineering']],
-    ['MLOps & cloud', ['Kubernetes', 'Docker', 'MLflow', 'Kubeflow', 'Airflow', 'AWS SageMaker', 'Google Vertex AI', 'Azure ML', 'Terraform']],
-    ['Data & analytics', ['Databricks', 'Apache Spark', 'Snowflake', 'BigQuery', 'dbt', 'Kafka', 'Power BI', 'Tableau', 'Looker']],
+    ['Languages & ML frameworks', ['Python', 'SQL', 'R', 'Scala', 'PyTorch', 'TensorFlow', 'JAX', 'scikit-learn', 'XGBoost', 'Hugging Face', 'OpenCV', 'spaCy'], 'terminal'],
+    ['GenAI & LLMs', ['LangChain', 'LlamaIndex', 'OpenAI & Anthropic APIs', 'Azure OpenAI', 'RAG', 'Vector databases', 'Fine-tuning (LoRA)', 'LLM evaluation', 'Prompt engineering'], 'spark'],
+    ['MLOps & cloud', ['Kubernetes', 'Docker', 'MLflow', 'Kubeflow', 'Airflow', 'AWS SageMaker', 'Google Vertex AI', 'Azure ML', 'Terraform'], 'cloud'],
+    ['Data & analytics', ['Databricks', 'Apache Spark', 'Snowflake', 'BigQuery', 'dbt', 'Kafka', 'Power BI', 'Tableau', 'Looker'], 'layers'],
   ],
   // [model, description, icon, link, link label]
   models: [
@@ -462,7 +462,7 @@ export const aiTalent = {
   faqs: [
     ['Do you already have AI candidates available?', 'Yes. SKAPS maintains a ready pool of pre-screened AI, ML, data and analytics professionals, so most searches start with people we already know instead of a cold job post.'],
     ['How quickly can we see profiles?', 'For most roles we share a reviewed shortlist within days of agreeing the role scorecard. Niche research and leadership roles can take longer, and we tell you that upfront.'],
-    ['Can AI engineers work with our team outside India?', 'Yes. Engineers can work remotely with teams in the US, Australia and elsewhere, employed on SKAPS’s compliant India payroll or hired directly by your entity.'],
+    ['Can AI engineers work with our team outside India?', 'Yes. Engineers can work remotely with teams in the US, the UK, Australia and elsewhere, employed on SKAPS’s compliant India payroll or hired directly by your entity.'],
     ['How is this different from SKAPS Intelligence?', 'SKAPS Intelligence is the AI we use inside our own hiring, payroll and compliance work. AI & Analytics Talent is the people: the engineers, scientists and analysts we place in your team.'],
   ],
 }

@@ -16,7 +16,7 @@ export const menus = [
     groups: [
       { heading: 'By engagement model', items: needs.map(([t, d, icon, slug]) => ({ title: t, desc: d, to: `/solutions#${slug}`, icon })) },
       { heading: 'By use case', items: useCases.map(([t, d, icon, to]) => ({ title: t, desc: d, to, icon })) },
-      { heading: 'By region', items: REGIONS.map(r => ({ title: r, desc: r.includes('India') ? 'Hyderabad headquarters, pan-India delivery' : `Payroll, staffing and compliance support in ${r}`, to: '/about#global', icon: r.includes('India') ? 'pin' : 'globe' })) },
+      { heading: 'By region', items: REGIONS.map(r => ({ title: r, desc: r.includes('India') ? 'Hyderabad headquarters, pan-India delivery' : `Payroll, staffing and compliance support in ${r.startsWith('United') ? 'the ' : ''}${r}`, to: '/about#global', icon: r.includes('India') ? 'pin' : 'globe' })) },
     ],
     promo: { theme: 'blue', eyebrow: 'Why SKAPS', title: 'The Smart Way to Build a Flexible Workforce', text: 'Workforce flexibility, cost efficiency, specialized talent and reduced compliance risk.', cta: 'Explore solutions', to: '/solutions', art: 'crystal', accent: 'blue' },
   },
