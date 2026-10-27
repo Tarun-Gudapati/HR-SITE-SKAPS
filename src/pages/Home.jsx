@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Mesh, NeedArt, SpotArt, needAccents } from '../components/Art'
+import { Mesh, SpotArt } from '../components/Art'
+import Icon from '../components/Icon'
 import { usePolarity } from '../components/Layout'
 import { Arrow, DemoButton, LogoMarquee, StatsStair, FAQ, CTABand, SectionHead } from '../components/Sections'
 import AIWorkflow from '../components/AIWorkflow'
-import { needs, testimonials, services, homeServices, getService } from '../data/site'
+import { testimonials, services, serviceGroups, homeServices, getService } from '../data/site'
 
 const heroRoles = ['Software Engineer', 'Data Scientist', 'Finance Controller', 'HR Business Partner', 'Sales Team', 'Support Team']
 
@@ -41,30 +42,45 @@ function Hero() {
   )
 }
 
-// Keep the card count a multiple of four so the 4- and 2-column grids stay even.
-const modelCards = [
-  ...homeServices.map(getService).map(s => ({ key: s.slug, title: s.title, text: s.summary, to: `/services/${s.slug}`, art: <SpotArt icon={s.icon} accent={s.accent} /> })),
-  ...needs.map(([t, d, , slug], i) => ({ key: slug, title: t, text: d, to: `/solutions#${slug}`, art: <NeedArt kind={slug} accent={needAccents[i]} /> })),
-  { key: 'all', title: `All ${services.length} services`, text: 'Payroll, compliance, training, HR technology, COE setup and more.', to: '/services', cta: 'Browse services', art: <SpotArt icon="layers" accent="cyan" ai={false} /> },
-]
+const featured = homeServices.map(getService)
+const moreGroups = serviceGroups.map(g => [g, services.filter(s => s.group === g && !homeServices.includes(s.slug))]).filter(([, list]) => list.length)
 
 function Models() {
   return (
     <section className="section" id="models">
       <div className="container">
-        <SectionHead center={false} eyebrow="What we do" title="Advice, talent and payroll, from one partner." copy="Start with HR consulting or executive search, tap our ready pool of AI talent, or pick the engagement that fits how you scale. SKAPS runs the hiring, the payroll and the compliance." />
-        <div className="model-grid">
-          {modelCards.map(c => (
-            <article className="model reveal" key={c.key}>
-              <div className="model-art">{c.art}</div>
+        <SectionHead center={false} eyebrow="What we do" title="Advice, talent and payroll, from one partner." copy={`${services.length} services across HR advisory, talent, payroll and compliance. Start with HR consulting or executive search, tap our ready pool of AI talent, or bring SKAPS in for the rest.`} />
+        <div className="model-grid model-grid-3">
+          {featured.map(s => (
+            <article className="model reveal" key={s.slug}>
+              <div className="model-art"><SpotArt icon={s.icon} accent={s.accent} /></div>
               <div className="model-body">
-                <h3>{c.title}</h3>
-                <p>{c.text}</p>
-                <Link className="card-link" to={c.to}>{c.cta || 'Learn more'} <Arrow style={{ width: 14, height: 14 }} /></Link>
+                <h3>{s.title}</h3>
+                <p>{s.summary}</p>
+                <Link className="card-link" to={`/services/${s.slug}`}>Learn more <Arrow style={{ width: 14, height: 14 }} /></Link>
               </div>
             </article>
           ))}
         </div>
+        <div className="svc-groups">
+          {moreGroups.map(([g, list]) => (
+            <div className="svc-group reveal" key={g}>
+              <span className="eyebrow muted">{g}</span>
+              <ul>
+                {list.map(s => (
+                  <li key={s.slug}>
+                    <Link className={`svc-row acc-${s.accent}`} to={`/services/${s.slug}`}>
+                      <span className="svc-row-ico"><Icon name={s.icon} /></span>
+                      <span className="svc-row-text"><strong>{s.title}</strong><small>{s.summary}</small></span>
+                      <Arrow className="arrow svc-row-arrow" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p className="svc-foot t-small t-muted">Need flexible capacity instead? Compare contract, temporary, dedicated-team and payroll-outsourcing models. <Link className="link" to="/solutions">Engagement models <Arrow style={{ width: 14, height: 14 }} /></Link></p>
       </div>
     </section>
   )
