@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import Icon from '../components/Icon'
-import { Crystal, Iso } from '../components/Art'
+import { Crystal } from '../components/Art'
 import LeadForm from '../components/LeadForm'
 import { usePolarity } from '../components/Layout'
-import { Arrow, PageHero, CloseLine, FAQ, SectionHead, DemoButton } from '../components/Sections'
+import { Arrow, PageHero, CloseLine, FAQ, SectionHead, DemoButton, QuoteCard } from '../components/Sections'
 import { complianceItems, complianceBadges, testimonials, clientLogos, faqs, stats, PHONES, EMAIL, ADDRESS, steps } from '../data/site'
 
 export function HowItWorks() {
@@ -64,14 +64,7 @@ export function Clients() {
         <div className="container">
           <SectionHead center={false} title="Client stories." />
           <div className="grid grid-3">
-            {testimonials.map(([q, n, r, m, ml]) => (
-              <figure className="card quote-card reveal" key={n} style={{ flex: 'none' }}>
-                <div className="brand-line"><Iso accent="blue" />{r.split(', ')[1]}</div>
-                <blockquote>“{q}”</blockquote>
-                <figcaption className="who">{n}<small>{r.split(', ')[0]}</small></figcaption>
-                <div className="metric"><strong>{m}</strong><span>{ml}</span></div>
-              </figure>
-            ))}
+            {testimonials.map(t => <QuoteCard t={t} key={t[1]} showMetric className="reveal" />)}
           </div>
         </div>
       </section>

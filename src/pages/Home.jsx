@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Mesh, SpotArt } from '../components/Art'
 import Icon from '../components/Icon'
 import { usePolarity } from '../components/Layout'
-import { Arrow, DemoButton, LogoMarquee, StatsStair, FAQ, CTABand, SectionHead } from '../components/Sections'
+import { Arrow, DemoButton, LogoMarquee, StatsStair, FAQ, CTABand, SectionHead, TestimonialMarquee } from '../components/Sections'
 import AIWorkflow from '../components/AIWorkflow'
 import { testimonials, services, serviceGroups, homeServices, getService } from '../data/site'
 
@@ -99,18 +99,8 @@ function Proof() {
     <section className="section">
       <div className="container">
         <SectionHead center={false} title="What clients say." cta={<Link className="card-link" to="/clients">All client stories <Arrow style={{ width: 14, height: 14 }} /></Link>} />
-        <div className="proof-row">
-          {testimonials.slice(0, 3).map(([q, n, r]) => {
-            const [role, org] = r.split(', ')
-            return (
-              <figure className="proof reveal" key={n}>
-                <blockquote>“{q}”</blockquote>
-                <figcaption>{n}<small>{role}{org ? ` · ${org}` : ''}</small></figcaption>
-              </figure>
-            )
-          })}
-        </div>
       </div>
+      <TestimonialMarquee items={testimonials} />
     </section>
   )
 }

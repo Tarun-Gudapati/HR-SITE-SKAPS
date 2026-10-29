@@ -326,10 +326,15 @@ export const steps = [
 export const complianceItems = ['Statutory Compliance Management', 'Labor Law Adherence', 'Employee Benefits Administration', 'Risk Reduction and Documentation']
 export const complianceBadges = ['ISO-certified payroll', 'Statutory compliance', 'Labor law adherence', 'Audit-ready documentation', 'Strict data confidentiality']
 
+// [quote, name, 'Role, Organization', metric?, metricLabel?]. The organization after the last comma
+// shows its logo when it matches a clientLogos name (see QuoteCard in Sections.jsx).
 export const testimonials = [
-  ['SKAPS helped us scale our team quickly through their contract staffing services. The hiring process was efficient, the candidates were highly qualified, and their HR management ensured everything remained compliant and well organized.', 'Anita Mehta', 'Head of Human Resources, Manufacturing Organization', '3x', 'faster team scale-up with contract staffing'],
-  ['Outsourcing our payroll management to SKAPS was one of the best decisions for our organization. Their accuracy, professionalism, and understanding of compliance requirements have given us complete confidence in our workforce operations.', 'Michael Fernandes', 'Chief Financial Officer, Retail and Distribution Company', '100%', 'on-time, accurate payroll cycles'],
-  ['Working with SKAPS has significantly improved the way we manage our workforce. Their team handled our payroll, operations, and compliance requirements seamlessly, allowing us to focus on expanding our business without worrying about administrative complexities.', 'Rohit Sharma', 'Director of Operations, Technology Services Company', '1', 'partner for payroll, operations and compliance'],
+  ['As we scaled Squizify into new markets, SKAPS became an extension of our team in India. They understood the kind of people we needed, moved quickly without cutting corners, and made every new hire feel looked after from day one.', 'Daniel McDouall', 'Founder & CEO, Squizify'],
+  ['SKAPS gave us a reliable team in India and took the payroll and compliance load off our plate. They are responsive, easy to work with and genuinely care about getting the details right, which matters a great deal in financial services.', 'Rafer Hart', 'Managing Director, Safe Financial'],
+  ['For a growing manufacturer, finding the right people for the plant and the sales team is never simple. SKAPS took the time to understand our business, sent us candidates who fit, and their payroll support has been dependable month after month.', 'Pradeep Kumar', 'Managing Partner, TORQ'],
+  ['What I value most about SKAPS is their honesty. They tell us what is realistic, keep every commitment and stay on top of statutory compliance, so we never have to chase it. It feels like working with a partner, not a vendor.', 'Sohail Hajiani', 'Partner, Tribo Industries'],
+  ['SKAPS has been a dependable partner for our staffing needs in India. Their recruiters understand technical roles, documentation and onboarding are always in order, and we get quick, clear answers whenever a question comes up.', 'Sundar Sundaram', 'Vice President, Wizcom Corporation'],
+  ['SKAPS has made life easier for our HR team. Their shortlists are well screened, interviews get scheduled without the usual back-and-forth, and onboarding runs smoothly. That consistency on every requirement is why we keep working with them.', 'Srinivas', 'HR Manager, GyanSys'],
 ]
 
 export const faqs = [

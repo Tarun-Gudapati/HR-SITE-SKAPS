@@ -33,7 +33,7 @@ export const menus = [
       { heading: 'About', items: [{ title: 'Our Story', to: '/about', icon: 'book' }, { title: 'How It Works', to: '/how-it-works', icon: 'layers' }, { title: 'Compliance', to: '/compliance', icon: 'shield' }, { title: 'FAQ', to: '/faq', icon: 'help' }] },
       { heading: 'Clients', items: [{ title: 'Client stories', to: '/clients', icon: 'star' }, { title: 'Organizations we support', to: '/clients#logos', icon: 'people' }] },
     ],
-    promo: { theme: 'cyan', eyebrow: 'What clients say', list: testimonials.map(([, n, r]) => ({ title: `${n} — ${r.split(',')[0]}`, to: '/clients' })), cta: 'All client stories', to: '/clients' },
+    promo: { theme: 'cyan', eyebrow: 'What clients say', list: testimonials.slice(0, 4).map(([, n, r]) => ({ title: `${n} — ${r.split(',')[0]}`, to: '/clients' })), cta: 'All client stories', to: '/clients' },
   },
 ]
 

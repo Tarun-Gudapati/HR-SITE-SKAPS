@@ -39,6 +39,39 @@ export function LogoMarquee({ intro }) {
   )
 }
 
+// ---------- Testimonials ----------
+const logoByOrg = Object.fromEntries(clientLogos.map(([src, name]) => [name, src]))
+// Tribo Industries trades as TORQ Speciality Lubricants (tribo.in), so it shares the TORQ logo.
+const orgAlias = { 'Tribo Industries': 'TORQ' }
+
+export function QuoteCard({ t: [q, n, r, m, ml], showMetric = false, hidden = false, className = '' }) {
+  const cut = r.lastIndexOf(', ')
+  const role = cut < 0 ? r : r.slice(0, cut), org = cut < 0 ? '' : r.slice(cut + 2)
+  const logo = logoByOrg[org] || logoByOrg[orgAlias[org]]
+  const initials = n.split(' ').map(w => w[0]).slice(0, 2).join('')
+  return (
+    <figure className={`tcard ${className}`} aria-hidden={hidden || undefined}>
+      <blockquote>“{q}”</blockquote>
+      {showMetric && m && <div className="tcard-metric"><strong>{m}</strong><span>{ml}</span></div>}
+      <figcaption>
+        {logo ? <span className="tcard-mark"><img src={logo} alt="" loading="lazy" /></span> : <span className="tcard-mark tcard-avatar" aria-hidden="true">{initials}</span>}
+        <span><strong>{n}</strong><small>{role}{org ? ` · ${org}` : ''}</small></span>
+      </figcaption>
+    </figure>
+  )
+}
+
+export function TestimonialMarquee({ items }) {
+  return (
+    <div className="marquee marquee-quotes reveal" role="region" aria-label="Client testimonials" tabIndex={0} style={{ '--dur': `${items.length * 5}s` }}>
+      <div className="marquee-track">
+        {items.map(t => <QuoteCard t={t} key={t[1]} />)}
+        {items.map(t => <QuoteCard t={t} key={`${t[1]}-copy`} hidden />)}
+      </div>
+    </div>
+  )
+}
+
 // ---------- "By the numbers": one card and one chart type per headline stat ----------
 const smoothPath = pts => pts.reduce((d, p, i) => {
   if (!i) return `M${p[0]} ${p[1]}`
