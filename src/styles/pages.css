@@ -40,6 +40,9 @@
 @media (max-width: 1024px) { .model-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px 40px; } }
 @media (max-width: 560px) { .model-grid { grid-template-columns: 1fr; gap: 28px; } .model { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; } .model-art .need-art { max-width: 96px; } }
 .model-grid.model-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px 40px; }
+.model-art .service-art { max-width: 184px; transition: transform var(--d-hover-in) var(--ease-enter); }
+.model:hover .service-art { transform: translateY(-4px); }
+@media (prefers-reduced-motion: reduce) { .model-art .service-art { transition: none; } .model:hover .service-art { transform: none; } }
 @media (max-width: 760px) { .model-grid.model-grid-3 { grid-template-columns: 1fr; gap: 28px; } .model-grid-3 .model { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; } .model-grid-3 .model-art .need-art { max-width: 96px; } }
 
 .close-line { padding: clamp(64px, 8vw, 104px) 0; }

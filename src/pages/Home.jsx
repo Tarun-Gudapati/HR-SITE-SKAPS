@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Mesh, SpotArt } from '../components/Art'
+import { Mesh, ServiceArt } from '../components/Art'
 import { usePolarity } from '../components/Layout'
 import { Arrow, DemoButton, LogoMarquee, StatsStair, FAQ, CTABand, SectionHead, TestimonialMarquee } from '../components/Sections'
 import AIWorkflow from '../components/AIWorkflow'
@@ -46,9 +46,9 @@ function Hero() {
 const modelCards = [
   ...homeServices.map(getService),
   ...serviceGroups.flatMap(g => services.filter(s => s.group === g && !homeServices.includes(s.slug))),
-].map(s => ({ key: s.slug, title: s.title, text: s.summary, to: `/services/${s.slug}`, art: <SpotArt icon={s.icon} accent={s.accent} /> })).concat([
-  { key: 'models', title: 'Engagement models', text: 'Contract, temporary, dedicated-team and payroll-outsourcing models for flexible capacity.', to: '/solutions', cta: 'Compare models', art: <SpotArt icon="layers" accent="cyan" ai={false} /> },
-  { key: 'start', title: 'Not sure where to start?', text: 'Tell us what you need to hire, pay or keep compliant, and we will recommend the right mix.', to: '/contact', cta: 'Talk to SKAPS', art: <SpotArt icon="phone" accent="lime" ai={false} /> },
+].map(s => ({ key: s.slug, title: s.title, text: s.summary, to: `/services/${s.slug}`, art: <ServiceArt scene={s.slug} accent={s.accent} /> })).concat([
+  { key: 'models', title: 'Engagement models', text: 'Contract, temporary, dedicated-team and payroll-outsourcing models for flexible capacity.', to: '/solutions', cta: 'Compare models', art: <ServiceArt scene="models" accent="cyan" /> },
+  { key: 'start', title: 'Not sure where to start?', text: 'Tell us what you need to hire, pay or keep compliant, and we will recommend the right mix.', to: '/contact', cta: 'Talk to SKAPS', art: <ServiceArt scene="start" accent="lime" /> },
 ])
 
 function Models() {
