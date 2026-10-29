@@ -15,7 +15,7 @@ export default function Footer({ footnote }) {
             <div className="footer-brand">
               <Brand />
               <p>{footerIntro}</p>
-              {liveSocials.length > 0 && <div className="socials">{liveSocials.map(([l, i, href]) => <a key={i} href={href} target="_blank" rel="noopener noreferrer" aria-label={`${BRAND_FULL} on ${l}`}><Icon name={i} /></a>)}</div>}
+              {liveSocials.length > 0 && <div className="socials">{liveSocials.map(([l, i, href]) => <a key={i} className={`social-${i}`} href={href} target="_blank" rel="noopener noreferrer" aria-label={`${BRAND_FULL} on ${l}`}><span className="social-ico"><Icon name={i} /></span><span>Follow us on {l}</span></a>)}</div>}
             </div>
             <div className="footer-col">
               <h4>Services</h4>
