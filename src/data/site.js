@@ -17,6 +17,7 @@ import wizcom from '../assets/logos/wizcom.png'
 import marvell from '../assets/logos/marvell.png'
 import torq from '../assets/logos/torq.png'
 import arunachala from '../assets/logos/arunachala.png'
+import aptarPharma from '../assets/logos/aptar-pharma.png'
 
 export const BRAND = 'SKAPS'
 export const BRAND_FULL = 'SKAPS HR SOLUTIONS'
@@ -37,7 +38,7 @@ export const NOTICE = ['Important Notice', 'SKAPS HR Solutions strictly adheres 
 export const clientLogos = [
   [gyansys, 'GyanSys'], [kanerika, 'Kanerika'], [safe, 'Safe Financial'], [snowrelic, 'SnowRelic'],
   [squizify, 'Squizify'], [ivymobility, 'Ivy Mobility'], [microchip, 'Microchip'],
-  [wizcom, 'Wizcom Corporation'], [marvell, 'Marvell'], [torq, 'TORQ'], [arunachala, 'Arunachala'],
+  [wizcom, 'Wizcom Corporation'], [marvell, 'Marvell'], [torq, 'TORQ'], [arunachala, 'Arunachala'], [aptarPharma, 'Aptar Pharma'],
 ]
 
 export const stats = [
@@ -280,7 +281,7 @@ export const industryDetails = {
   'financial-services': ['Finance', ['Finance & accounts', 'Risk analysts', 'Operations'], ['Payroll outsourcing', 'Statutory compliance'], 'payroll-management-india'],
   'ai-data-analytics': ['AI & Data', ['Data scientists', 'ML engineers', 'Data analysts'], ['Contract staffing', 'Dedicated teams'], 'ai-analytics-talent'],
   'semiconductors-hardware': ['Semiconductors', ['Chip design', 'Verification', 'Embedded systems'], ['Specialist hiring', 'Payroll outsourcing'], 'executive-search', ['Microchip', 'Marvell']],
-  'healthcare': ['Healthcare', ['Clinical staff', 'Medical admin', 'Healthcare IT'], ['Contract staffing', 'Temporary staffing'], 'staffing-solutions'],
+  'healthcare': ['Healthcare', ['Clinical staff', 'Medical admin', 'Healthcare IT'], ['Contract staffing', 'Temporary staffing'], 'staffing-solutions', ['Aptar Pharma']],
   'manufacturing': ['Manufacturing', ['Shop-floor teams', 'Plant engineers', 'Plant leadership'], ['Contract labor compliance', 'Multi-location payroll'], 'compliance-legal'],
   'retail-ecommerce': ['Retail', ['Store & warehouse', 'Fulfilment', 'Customer support'], ['Temporary staffing', 'Payroll outsourcing'], 'staffing-solutions'],
   'saas-software': ['SaaS', ['Product & engineering', 'Sales', 'Customer success'], ['Dedicated teams', 'Contract staffing'], 'recruitment-process'],
@@ -413,7 +414,7 @@ export const values = [
 ]
 
 // TODO(Skaps): add real profile URLs — entries left as '#' are hidden in the footer.
-export const socials = [['LinkedIn', 'linkedin', '#'], ['Facebook', 'facebook', '#'], ['Instagram', 'instagram', '#'], ['Twitter', 'twitter', '#']]
+export const socials = [['LinkedIn', 'linkedin', 'https://www.linkedin.com/company/skaps-hr-solutions-private-limited/'], ['Facebook', 'facebook', '#'], ['Instagram', 'instagram', '#'], ['Twitter', 'twitter', '#']]
 
 export const footerIntro = 'SKAPS HR Solutions is an AI-powered workforce management and recruitment partner helping organizations streamline hiring, payroll, compliance, and employee management across multiple industries.'
 
