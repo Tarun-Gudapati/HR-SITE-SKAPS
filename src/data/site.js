@@ -29,6 +29,7 @@ export const PHONE = PHONES[0].display
 export const PHONE_TEL = PHONES[0].tel
 export const EMAIL = 'info@skaps.co.in'
 export const ADDRESS = 'First Floor, ARD Magnum, Door No: 12-7-134/MH/2 in Sy. No: 1011/10(P), Anjaneya Nagar, Green Hills Road, Phase 4, Near Moosa Peta, Hyderabad – 500018'
+export const MAP_URL = 'https://maps.app.goo.gl/ceVgphfzNoYWH24t7'
 export const REGIONS = ['United States', 'India (Headquarters)', 'United Kingdom', 'Australia']
 export const YEARS = '10+'
 

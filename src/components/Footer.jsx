@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import Icon from './Icon'
 import { Brand } from './Header'
-import { services, needs, industries, industryLink, socials, footerIntro, PHONES, EMAIL, ADDRESS, BRAND_FULL } from '../data/site'
+import { services, needs, industries, industryLink, socials, footerIntro, PHONES, EMAIL, ADDRESS, MAP_URL, BRAND_FULL } from '../data/site'
 
 const liveSocials = socials.filter(([, , href]) => href && href !== '#')
 
@@ -38,7 +38,7 @@ export default function Footer({ footnote }) {
               <ul className="footer-contact">
                 {PHONES.map((p, i) => <li key={p.tel}><Icon name="phone" /><span><a href={`tel:${p.tel}`}>{p.display}</a>{i > 0 && ` (${p.label.toLowerCase()})`}</span></li>)}
                 <li><Icon name="mail" /><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
-                <li><Icon name="pin" /><span>{ADDRESS}</span></li>
+                <li><Icon name="pin" /><span>{ADDRESS}<a className="map-link" href={MAP_URL} target="_blank" rel="noopener noreferrer"><Icon name="map" />View on Google Maps</a></span></li>
               </ul>
             </div>
           </div>

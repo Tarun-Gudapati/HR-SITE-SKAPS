@@ -4,7 +4,7 @@ import { Crystal } from '../components/Art'
 import LeadForm from '../components/LeadForm'
 import { usePolarity } from '../components/Layout'
 import { Arrow, PageHero, CloseLine, FAQ, SectionHead, DemoButton, QuoteCard } from '../components/Sections'
-import { complianceItems, complianceBadges, testimonials, clientLogos, faqs, stats, PHONES, EMAIL, ADDRESS, steps } from '../data/site'
+import { complianceItems, complianceBadges, testimonials, clientLogos, faqs, stats, PHONES, EMAIL, ADDRESS, MAP_URL, steps } from '../data/site'
 
 export function HowItWorks() {
   usePolarity('default')
@@ -111,7 +111,7 @@ export function Contact() {
             <div className="details" style={{ textAlign: 'left', marginTop: 8 }}>
               {PHONES.map(p => <a key={p.tel} href={`tel:${p.tel}`}><Icon name="phone" /><span><small>{p.label} phone</small>{p.display}</span></a>)}
               <a href={`mailto:${EMAIL}`}><Icon name="mail" /><span><small>Email</small>{EMAIL}</span></a>
-              <div><Icon name="pin" /><span><small>Office location</small>{ADDRESS}</span></div>
+              <div><Icon name="pin" /><span><small>Office location</small>{ADDRESS}<a className="map-link" href={MAP_URL} target="_blank" rel="noopener noreferrer"><Icon name="map" />View on Google Maps<Arrow style={{ width: 14, height: 14 }} /></a></span></div>
             </div>
           </div>
         </div>

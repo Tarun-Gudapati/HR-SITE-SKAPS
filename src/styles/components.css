@@ -321,6 +321,14 @@
 .footer-col a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 .footer-contact li { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; color: var(--on-dark-2); line-height: 1.45; }
 .footer-contact .ico { width: 16px; height: 16px; margin-top: 2px; color: var(--on-dark-3); }
+.map-link { display: flex; width: fit-content; align-items: center; gap: 7px; margin-top: 12px; padding: 7px 14px 7px 11px; border-radius: 999px; border: 1px solid var(--stroke-soft); background: #fff; color: var(--ink); font-size: 13px; font-weight: 600; line-height: 1.2; transition: border-color var(--d-hover-in) var(--ease-enter), box-shadow var(--d-hover-in) var(--ease-enter); }
+.map-link:hover { border-color: var(--blue-500); box-shadow: 0 8px 20px -12px rgba(10, 37, 64, .35); }
+.map-link .arrow { transition: transform var(--d-hover-in) var(--ease-enter); }
+.map-link:hover .arrow { transform: translateX(var(--arrow-travel)); }
+.details .map-link .ico, .footer-contact .map-link .ico { width: 15px; height: 15px; padding: 0; margin: 0; border-radius: 0; background: none; color: var(--blue-600); }
+.footer-contact .map-link { margin-top: 10px; background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .22); color: #fff; }
+.footer-contact .map-link:hover { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .4); }
+.footer-contact .map-link .ico { color: var(--lime-400); }
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 12px; color: var(--on-dark-3); }
 .socials { display: flex; flex-wrap: wrap; gap: 10px; }
 .socials a { display: inline-flex; align-items: center; gap: 12px; height: 52px; padding: 0 20px 0 6px; border-radius: 999px; background: #fff; color: var(--ink); font-size: 15px; font-weight: 600; box-shadow: 0 10px 24px -14px rgba(0, 0, 0, .5); transition: transform var(--d-hover-in) var(--ease-enter), box-shadow var(--d-hover-in) var(--ease-enter); }
